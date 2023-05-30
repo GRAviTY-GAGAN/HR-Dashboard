@@ -1,0 +1,29 @@
+.heading{
+    font-size: 2rem;
+    color: #6075fe;
+    font-weight: 600;
+    padding-bottom: 0.5rem;
+}
+
+.mainstyle{
+    padding: 0.8rem;
+    
+}
+
+.leaveCardsContainer {
+    max-height: 78vh;
+    overflow-y: scroll;
+    scroll-behavior: smooth;
+}
+
+.nopendingleavectn{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.emptyimg{
+    width: 30%;
+    height: 30%;
+}

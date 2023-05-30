@@ -1,0 +1,132 @@
+.employeeDashboard__empdash {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 0.6rem 1.8rem;
+    /* border: 1px solid green; */
+}
+
+.cardstyle {
+    height: 36vh;
+    font-size: 1rem;
+    color: #6075fe;
+    /* color: #7bd4fb; */
+    font-weight: 600;
+    padding: 0.4rem;
+    margin: 0.5rem 1.5rem;
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+    border-radius: 10px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-direction: column;
+}
+
+.empdashboard {
+    height: 86vh;
+    overflow-y: scroll;
+}
+
+.progress {
+    margin-top: 1rem;
+    padding: 0.2rem;
+}
+
+.cardstyle:hover {
+    transition-delay: 100ms;
+    transform: scale(1.1);
+}
+
+.tooltip {
+    overflow: scroll;
+    scroll-behavior: smooth;
+    transition: all 0.1s linear;
+}
+
+.shift {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    height: 36vh;
+    font-size: 1rem;
+    color: #6075fe;
+    font-weight: 600;
+    padding: 0.4rem;
+    margin: 0.5rem 1.5rem;
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+    border-radius: 10px;
+    transition: all 0.1s linear;
+}
+
+.shifttext {
+    text-align: center;
+    padding: 0.6rem;
+}
+
+.shift:hover {
+    transition-delay: 100ms;
+    transform: scale(1.1);
+}
+
+.issuebtn {
+    font-size: small;
+    width: 70%;
+    color: #FF4646;
+    text-align: center;
+    padding: 2px;
+    border: 1px solid #FF4646;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.issuebtn:hover {
+    color: white;
+    background-color: #FF4646;
+    padding: 2px;
+    border-radius: 5px;
+    font-weight: 600;
+}
+
+.footerctn {
+    display: flex;
+    justify-content: flex-end;
+    margin: 5px 1rem;
+}
+
+.footerbtn {
+    text-align: center;
+    width: 25%;
+    padding: 0.4rem;
+    border: 1px solid #6075fe;
+    border-radius: 6px;
+    font-weight: 600;
+    font-size: 1rem;
+    color: #6075fe;
+    cursor: pointer;
+}
+
+.footerbtn:hover {
+    background-color: #6075fe;
+    color: white;
+    transform: scale(1.1);
+    transition: background-color 200ms ease-in-out;
+    transition: transform 200ms ease-in-out;
+}
+
+@media screen and (max-width: 500px) {
+    .employeeDashboard__empdash {
+        display: block;
+        margin: 0;
+    }
+
+    .cardstyle {
+        width: 170px;
+        margin: 0;
+    }
+
+    .shift {
+        width: 170px;
+        margin: 0;
+    }
+}
