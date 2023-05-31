@@ -27,6 +27,8 @@ const Signup = () => {
   const [highlight, setHighlight] = useState(false);
   const [form] = Form.useForm();
 
+  const [api, contextHolder] = notification.useNotification();
+
   const [responseToNext, setResponseToNext] = useState(false);
   const [spinner, setSpinner] = useState(false);
 
@@ -41,43 +43,56 @@ const Signup = () => {
   }, []);
 
   const openNotificationWithIcon = (type, mes, des) => {
-    notification[type]({
+    api[type]({
       message: mes,
       description: des,
     });
   };
 
   const verifySignup = async (userDataObj) => {
-    console.log(userDataObj, "<--- user Object ");
+    try {
+      console.log(userDataObj, "<--- user Object ");
 
-    let response = await axios({
-      method: "post",
-      // url: "https://hr-dashboard-nimish.herokuapp.com/auth/signup",
-      url: "http://localhost:5000/auth/signup",
-      data: userObj,
-    });
+      let response = await axios({
+        method: "post",
+        // url: "https://hr-dashboard-nimish.herokuapp.com/auth/signup",
+        url: "http://localhost:5000/auth/signup",
+        data: userObj,
+      });
 
-    console.log("comming from Backend", response);
+      console.log("comming from Backend", response);
 
-    dispatch({
-      type: ID,
-      id: response.data.id,
-    });
+      dispatch({
+        type: ID,
+        id: response.data.id,
+      });
 
-    if (response.status === 200) {
       setResponseToNext(true);
-    } else {
+    } catch (error) {
+      console.log(error, "ERROR");
       openNotificationWithIcon(
         "error",
         "Please try again",
-        "Incorrect user credentials"
+        `${error.response.data.msg}`
       );
       setSpinner(false);
     }
+
+    // if (response.status === 200) {
+    //   setResponseToNext(true);
+    // } else {
+    //   openNotificationWithIcon(
+    //     "error",
+    //     "Please try again",
+    //     "Incorrect user credentials"
+    //   );
+    //   setSpinner(false);
+    // }
   };
 
   return (
     <div className="login">
+      {contextHolder}
       <div className="signup__container signupcont">
         <div className="cont1">
           <p
