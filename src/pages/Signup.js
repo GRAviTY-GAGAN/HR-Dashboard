@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useSelector, useDispatch } from "react-redux";
-import { Link, Navigate } from "react-router-dom";
+import { Link, Navigate, useNavigate } from "react-router-dom";
 
 import {
   SIGNIN,
@@ -27,6 +27,8 @@ const Signup = () => {
   const [highlight, setHighlight] = useState(false);
   const [form] = Form.useForm();
 
+  const navigate = useNavigate();
+
   const [api, contextHolder] = notification.useNotification();
 
   const [responseToNext, setResponseToNext] = useState(false);
@@ -50,6 +52,7 @@ const Signup = () => {
   };
 
   const verifySignup = async (userDataObj) => {
+    console.log(userDataObj, "USEROBJ");
     try {
       console.log(userDataObj, "<--- user Object ");
 
@@ -76,6 +79,9 @@ const Signup = () => {
         `${error.response.data.msg}`
       );
       setSpinner(false);
+      setTimeout(() => {
+        navigate("/signup");
+      }, 20);
     }
 
     // if (response.status === 200) {
