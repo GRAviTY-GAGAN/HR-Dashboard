@@ -24,7 +24,7 @@
    width: 100%;
 }
 
-.sendbtnctn {
+.employeeDailyUpdate__sendbtnctn {
    margin-top: 1rem;
    display: flex;
    color: #7bd4fb;
@@ -72,6 +72,26 @@
 
    .employeeDailyUpdate__updatetxt {
       /* margin: 1rem; */
+      width: 100%;
+   }
+}
+
+@media screen and (max-width:900px) and (min-width:501px) {
+   .employeeDailyUpdate__empupdate {
+      margin: auto;
+      width: 70%;
+      display: block;
+   }
+
+   .empflex {
+      width: 100%;
+   }
+
+   .employeeDailyUpdate__updatetxt {
+      width: 100%;
+   }
+
+   .employeeDailyUpdate__sendbtnctn {
       width: 100%;
    }
 }

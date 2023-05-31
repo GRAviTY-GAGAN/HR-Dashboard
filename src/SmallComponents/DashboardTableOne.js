@@ -223,13 +223,14 @@ const DashboardTableOne = ({ clickedBtn }) => {
 
   return (
     <div className="dtoc">
-      <div>
+      <div id="tablewrapper">
         <Table
           loading={loading}
           style={{ padding: "5px" }}
           dataSource={allrequest}
           columns={columns}
           align={"right"}
+          scroll={{ x: true }}
           onRow={(record, rowIndex) => {
             return {
               onClick: () => showModal(record),

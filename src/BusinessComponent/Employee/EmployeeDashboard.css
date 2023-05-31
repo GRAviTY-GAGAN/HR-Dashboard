@@ -59,6 +59,10 @@
     transition: all 0.1s linear;
 }
 
+.employeeDashboard__timeAndPermormance {
+    display: flex;
+}
+
 .shifttext {
     text-align: center;
     padding: 0.6rem;
@@ -125,8 +129,39 @@
         margin: 0;
     }
 
+    .employeeDashboard__timeAndPermormance {
+        margin-top: 1rem;
+        justify-content: space-evenly;
+    }
+
     .shift {
         width: 170px;
+        margin: 0;
+    }
+}
+
+@media screen and (max-width:900px) and (min-width:501px) {
+    .employeeDashboard__empdash {
+        display: block;
+        margin: 0;
+    }
+
+    .cardstyle {
+        width: 270px;
+        height: 250px;
+        margin: 0;
+    }
+
+    .employeeDashboard__timeAndPermormance {
+        width: 70%;
+        margin: auto;
+        margin-top: 2rem;
+        gap: 1rem;
+    }
+
+    .shift {
+        width: 270px;
+        height: 250px;
         margin: 0;
     }
 }

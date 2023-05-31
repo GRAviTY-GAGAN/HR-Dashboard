@@ -208,11 +208,12 @@ function PayrollTable({ clickedBtn }) {
 
   return (
     <div className="dtoc">
-      <div>
+      <div id="tablewrapper">
         <Table
           loading={loading}
           style={{ padding: "5px" }}
           dataSource={mainData}
+          scroll={{ x: true }}
           columns={columns}
           align={"center"}
           onRow={(record, rowIndex) => {
@@ -279,25 +280,8 @@ function PayrollTable({ clickedBtn }) {
             <strong> Update Salary </strong>
           </div>
           <div className="econtainer">
-            <div
-              style={{
-                display: "flex",
-                justifyContent: "flex-start",
-                aligItem: "center",
-                width: "100%",
-                marginTop: "0.4rem",
-              }}
-            >
-              <span
-                style={{
-                  fontSize: "1.2rem",
-                  marginTop: "0.3rem",
-                  // color: "#A4A6B3",
-                  fontWeight: "400",
-                }}
-              >
-                Enter in Lakhs
-              </span>
+            <div className="payroll__updateSalaryCont">
+              <span className="payroll__updateSalary">Enter in Lakhs :</span>
               <input
                 placeholder="  "
                 className="inputShift"

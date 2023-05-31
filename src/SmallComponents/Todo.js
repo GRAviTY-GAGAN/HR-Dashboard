@@ -239,14 +239,14 @@ const Todo = () => {
           </div>
 
           {!updateActive ? (
-            <div className="sendbtnctn">
+            <div className="todos__sendbtnctn">
               <div onClick={handleAddTodo} className="sendbtn">
                 {" "}
                 Add{" "}
               </div>
             </div>
           ) : (
-            <div className="sendbtnctn">
+            <div className="todos__sendbtnctn">
               <div onClick={handleUpdateTodo} className="sendbtn">
                 {" "}
                 Update{" "}

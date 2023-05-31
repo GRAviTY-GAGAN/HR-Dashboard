@@ -98,19 +98,14 @@
   margin-left: 0.6rem;
 }
 
-.employeeDashboard__timeAndPermormance {
-  display: flex;
-}
+
 
 @media screen and (max-width:500px) {
   .employeeLeave__emplevMainCont {
     margin: 0;
   }
 
-  .employeeDashboard__timeAndPermormance {
-    margin-top: 1rem;
-    justify-content: space-evenly;
-  }
+
 
   .employeeLeave__emplev {
     display: block;
@@ -133,9 +128,6 @@
 
   .employeeLeave__raiseIssueBtn {
     margin-right: 0;
-    /* text-align: left; */
   }
-
-
 
 }

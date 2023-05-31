@@ -37,10 +37,10 @@ function EmployeePayroll() {
     <div className="mainstyle">
       <div className="headingtxt">
         {" "}
-        <span className="cardtxt"> Home / </span> Payroll Management{" "}
+        <span className="cardtxt"></span> Payroll Management{" "}
       </div>
 
-      <div className="btnctn">
+      <div className="employeePayroll__btnctn">
         <div
           className="btnpr editbtn"
           // onClick={updateSalary(10)}
@@ -81,8 +81,8 @@ function EmployeePayroll() {
         setRaiseIssueModal={setRaiseIssueModal}
       />
 
-      <div className="empprstyle" style={{ width: "100%" }}>
-        <div style={{ width: "50%" }}>
+      <div className="employeePayroll__empprstyle" style={{ width: "100%" }}>
+        <div className="employeePayroll__empprstyleLeftCont">
           <h2>
             {" "}
             <span className="cardtxt"> Name : </span>{" "}
@@ -94,7 +94,7 @@ function EmployeePayroll() {
             <span className="cardtxt"> Department :</span> {userObj.deparatment}{" "}
           </h3>
 
-          <div className="empprstyle" style={{ width: "90%" }}>
+          <div className="employeePayroll_empprstyleSubCont">
             <div className="cardpr">
               <div className="cardtxt"> Salary credited </div>
               <div className="cardamt">
@@ -115,7 +115,7 @@ function EmployeePayroll() {
             </div>
           </div>
 
-          <div className="empprstyle" style={{ width: "90%" }}>
+          <div className="employeePayroll_empprstyleSubCont">
             <div className="cardpr">
               <div className="cardtxt">Leaves ( Month )</div>
               <div className="cardamt">{userObj.leavesTakenInMonth}</div>
@@ -126,7 +126,7 @@ function EmployeePayroll() {
             </div>
           </div>
 
-          <div className="empprstyle" style={{ width: "90%" }}>
+          <div className="employeePayroll_empprstyleSubCont">
             <div className="cardpr">
               <div className="cardtxt">Leaves ( Paid )</div>
               <div className="cardamt">{userObj.paidLeavesRemaining}</div>
@@ -138,7 +138,7 @@ function EmployeePayroll() {
           </div>
         </div>
 
-        <div className="" style={{ width: "50%" }}>
+        <div className="employeePayroll__empprstyleRightCont">
           <div className="paymentdetails">
             <div className="cardpr">
               <div className="cardtxt">Monthly Pay</div>

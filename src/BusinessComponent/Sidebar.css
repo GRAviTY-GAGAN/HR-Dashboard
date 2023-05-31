@@ -99,3 +99,33 @@ ul li {
         padding: 0px 5px 5px 0px;
     }
 }
+
+@media screen and (max-width:900px) and (min-width:501px) {
+    .sidebar__mainCont {
+        position: absolute;
+        width: 240px;
+        background-color: aliceblue;
+        z-index: 5;
+    }
+
+    .sidebar__sidebar {
+        width: 100%;
+    }
+
+    .sidebar__sidebarClose {
+        left: -250px;
+        transition: all linear 0.2s;
+    }
+
+    .sidebar__sidebarOpen {
+        left: 0px;
+        transition: all linear 0.2s;
+    }
+
+    .sidebar__hamClose {
+        display: flex;
+        justify-content: flex-end;
+        font-size: x-large;
+        padding: 0px 5px 5px 0px;
+    }
+}

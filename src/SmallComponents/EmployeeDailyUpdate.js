@@ -131,7 +131,7 @@ function EmployeeDailyUpdate() {
           />
         </div>
 
-        <div className="sendbtnctn">
+        <div className="employeeDailyUpdate__sendbtnctn">
           <div onClick={() => updateTaskCompleted()} className="sendbtn">
             {spinner == true ? <Spin tip="updating" /> : "Update"}
             {/* {" "}

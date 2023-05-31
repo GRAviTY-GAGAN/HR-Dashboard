@@ -63,13 +63,14 @@
     /* border: 1px solid black; */
 }
 
-.sendbtnctns {
+.todos__sendbtnctn {
     display: flex;
     justify-content: center;
     color: #7bd4fb;
     font-size: 1.2rem;
     justify-content: flex-start;
     width: 22rem;
+    margin-top: 1rem;
 }
 
 .addButton {
@@ -107,6 +108,30 @@
     }
 
     .updatetxts {
+        width: 100%;
+    }
+}
+
+@media screen and (max-width:900px) and (min-width:501px) {
+    .todos__empupdates {
+        display: block;
+        margin: auto;
+        width: 70%;
+    }
+
+    .todoCardsContainer {
+        width: 100%;
+    }
+
+    .updatetxts {
+        width: 100%;
+    }
+
+    .todos__empupdates {
+        margin-top: 2rem;
+    }
+
+    .todos__sendbtnctn {
         width: 100%;
     }
 }
