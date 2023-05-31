@@ -93,7 +93,8 @@ function PayrollTable({ clickedBtn }) {
 
     let responseObj = await axios({
       method: "post",
-      url: `https://hr-dashboard-nimish.herokuapp.com/admin/salary/${currentEmpId}`,
+      // url: `https://hr-dashboard-nimish.herokuapp.com/admin/salary/${currentEmpId}`,
+      url: `http://localhost:5000/admin/salary/${currentEmpId}`,
       data: {
         salary: salary,
       },
@@ -136,6 +137,7 @@ function PayrollTable({ clickedBtn }) {
     let responseObj = await axios({
       method: "post",
       url: `https://hr-dashboard-nimish.herokuapp.com/admin/salary/credit/${currentEmpId}`,
+      url: `http://localhost:5000/admin/salary/credit/${currentEmpId}`,
       data: {},
     });
 
