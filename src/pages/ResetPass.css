@@ -1,0 +1,20 @@
+.resetPass__mainCont {
+    background-color: #0f172a;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.resetPass__formCont {
+    padding: 1rem;
+    border-radius: 5px;
+    background-color: aliceblue;
+    width: 400px;
+}
+
+@media screen and (max-width:500px) {
+    .resetPass__formCont {
+        width: 350px;
+    }
+}

@@ -143,7 +143,7 @@
   color: #7bd4fb;
 }
 
-.statusctn {
+.employeePrevLeave__statusctn {
   padding: 8px;
   /* border: 1px solid #7bd4fb; */
   border: 1px solid #5FD068;
@@ -215,8 +215,51 @@
     margin-top: 1rem;
   }
 
+  .employeePrevLeave__datesCont {
+    display: flex;
+  }
+
+  .pendingCard {
+    display: block;
+  }
+
+  .employeePrevLeave__totalDays {
+    display: inline-block;
+    justify-content: center;
+    /* margin-bottom: 1rem; */
+    margin-left: 1rem;
+  }
+
+  .datesDisplay {
+    font-size: 16px;
+    width: 40vw;
+  }
+
+  .employeePrevLeave__statusctn {
+    display: inline-block;
+    width: 150px;
+    margin-left: 0.6rem;
+  }
+
   .empprevleave__pendingLeavesMain {
     width: 100%;
     margin: 0;
+  }
+
+  .iconctnstyle {
+    display: inline-block;
+  }
+
+}
+
+@media screen and (min-width:500px) and (max-width:900px) {
+  .employeePrevLeave__datesCont {
+    display: flex;
+    gap: 2rem;
+  }
+
+  .datesDisplay {
+
+    gap: 2rem;
   }
 }

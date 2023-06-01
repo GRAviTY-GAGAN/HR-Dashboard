@@ -13,23 +13,23 @@ import Leave from "./BusinessComponent/Leave";
 import Test from "./BusinessComponent/Test";
 import Updates from "./BusinessComponent/Employee/Updates";
 import Chat from "./BusinessComponent/Chat";
-import PageNotFound from './PageNotFound';
+import PageNotFound from "./PageNotFound";
 // import DashboardTable from './BusinessComponent/DashboardTable';
 // import PreDashTable from "./BusinessComponent/Employee/PreDashTable";
 import DashboardTableOne from "./SmallComponents/DashboardTableOne";
 
 import "./App.css";
+import ResetPass from "./pages/ResetPass";
+import ForgotPass from "./pages/ForgotPass";
 // import "antd/dist/antd.css";
 
 function App() {
   const location = useLocation();
-  const navigate= useNavigate();
+  const navigate = useNavigate();
 
-
-
-  useEffect(()=>{
+  useEffect(() => {
     document.title = "HR-Dashboard";
-  })
+  });
 
   // useEffect(()=>{
   //   switch (location?.pathname) {
@@ -42,7 +42,6 @@ function App() {
   //       return;
   //   }
   // })
-  
 
   return (
     <>
@@ -50,6 +49,8 @@ function App() {
         <div className="App">
           <Routes>
             <Route exact path="/" element={<Login />} />
+            <Route exact path="/forgotPass" element={<ForgotPass />} />
+            <Route exact path="/resetPass/:id" element={<ResetPass />} />
             <Route exact path="signup" element={<Signup />} />
             <Route exact path="home" element={<Home />}>
               <Route exact path="employee/dashboard" element={<Dashboard />} />

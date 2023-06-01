@@ -174,7 +174,7 @@ const Login = () => {
               {" "}
               <div className="label password ">
                 <label>Password</label>
-                <Link to="/">
+                <Link to="/forgotPass">
                   <motion.div
                     style={{ fontSize: "0.8rem" }}
                     whileHover={{ scale: 1.1 }}

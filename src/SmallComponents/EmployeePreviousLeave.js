@@ -122,7 +122,7 @@ function EmployeePreviousLeave({ pendingObj }) {
                                 className="pendingCard"
                                 style={{ marginTop: "1rem" }}
                               >
-                                <div className="">
+                                <div className="employeePrevLeave__datesCont">
                                   <div className="datesDisplay">
                                     <IoMdReturnRight
                                       fontSize="1.5rem"
@@ -144,7 +144,7 @@ function EmployeePreviousLeave({ pendingObj }) {
                                   </div>
                                 </div>
 
-                                <div style={{ fontSize: "1.2rem" }}>
+                                <div className="employeePrevLeave__totalDays">
                                   {"Days : "}
                                   <span
                                     className="datespan"
@@ -155,7 +155,9 @@ function EmployeePreviousLeave({ pendingObj }) {
                                   </span>
                                 </div>
 
-                                <div className="statusctn">Pending</div>
+                                <div className="employeePrevLeave__statusctn">
+                                  Pending
+                                </div>
 
                                 <div className="iconctnstyle">
                                   <MoreOutlined className="iconstyle more" />
