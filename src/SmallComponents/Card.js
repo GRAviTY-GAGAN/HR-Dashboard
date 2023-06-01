@@ -112,30 +112,12 @@ function Card({ Obj, fetchReq }) {
       {Obj.isApproved == false && Obj.isRejected == false && (
         <div className="cardmainstyle">
           <div className="card">
-            <div
-              style={{
-                color: "rgb(53, 66, 89)",
-                width: "70%",
-                marginLeft: "1rem",
-                padding: "10px",
-              }}
-              onClick={showModal}
-            >
-              <div className="name">
+            <div className="card__cardSubCont" onClick={showModal}>
+              <div id="name" className="name">
                 <div className="namestyle">
                   <div>{Obj.employeName} </div>
                   {/* <div className="smalltext" style={{marginLeft: "1rem", fontSize:"1.2rem", fontWeight:"400"}} > { "( " + moment(Obj.dateOfLeave).format('MMMM Do YYYY, h:mm:ss a') + " )"} </div> */}
-                  <div
-                    className="smalltext"
-                    style={{
-                      marginRight: "10%",
-                      display: "flex",
-                      alignItems: "center",
-                      justifyContent: "space-around",
-                      padding: "8px",
-                      width: "60%",
-                    }}
-                  >
+                  <div id="dateFromAndTo" className="smalltext">
                     <span
                       className="spantg"
                       style={{ color: "#7bd4fb" }}
@@ -213,12 +195,14 @@ function Card({ Obj, fetchReq }) {
                 </div>
               </div>
               <div className="smalltext ">
-                Subject :<span className="spantg">{Obj?.reasonOfLeave}</span>
+                Subject : <span className="spantg">{Obj?.reasonOfLeave}</span>
               </div>
               <div className="smalltext">
                 {" "}
                 Leaves Taken this Month :{" "}
-                <span className="spantg">{Obj.leavesTakenInMonth}</span> and
+                <span className="spantg">{Obj.leavesTakenInMonth}</span>
+              </div>
+              <div className="smalltext">
                 Remaining Leaves :{" "}
                 <span className="spantg"> {Obj.remainingLeaves}</span>
               </div>
