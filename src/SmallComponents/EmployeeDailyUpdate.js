@@ -13,7 +13,7 @@ import Todo from "./Todo";
 const { TextArea } = Input;
 
 function EmployeeDailyUpdate() {
-  const userObj = useSelector((state) => state);
+  const userObj = useSelector((state) => state.reducer);
   const dispatch = useDispatch();
 
   let tempUpdateObj = {

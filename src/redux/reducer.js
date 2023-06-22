@@ -32,7 +32,7 @@ const initialState = JSON.parse(localStorage.getItem("User")) || {
   paidLeavesRemaining: 12,
   tasksOfTheMonth: 0,
   tasksCompletedInMonth: 0,
-  performanceOfPerviousMonth: 100,
+  performanceOfPerviousMonth: 0,
   performanceMessage: "",
   shiftOfCurrentMonth: "",
 

@@ -10,7 +10,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { MenuFoldOutlined } from "@ant-design/icons";
 
 const Siderbar = ({ handleCloseSidebar, sidebarClose }) => {
-  const userObj = useSelector((state) => state);
+  const userObj = useSelector((state) => state.reducer);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const location = useLocation();

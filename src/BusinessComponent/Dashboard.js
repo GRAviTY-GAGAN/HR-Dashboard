@@ -12,7 +12,7 @@ import { notification } from "antd";
 import { useNavigate } from "react-router-dom";
 
 function Dashboard() {
-  const userObj = useSelector((state) => state);
+  const userObj = useSelector((state) => state.reducer);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [returnToLoginPage, setReturnToLoginPage] = useState(false);
@@ -50,7 +50,8 @@ function Dashboard() {
   async function updateShift(shift) {
     let responseObj = await axios({
       method: "post",
-      url: `https://hr-dashboard-nimish.herokuapp.com/admin/shift/${userObj.id}`,
+      // url: `https://hr-dashboard-nimish.herokuapp.com/admin/shift/${userObj.id}`,
+      url: `http://localhost:5000/admin/performance/${userObj.id}`,
       data: {
         shift: shift,
       },

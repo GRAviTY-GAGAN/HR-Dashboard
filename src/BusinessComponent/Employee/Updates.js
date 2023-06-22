@@ -9,7 +9,7 @@ import { Spin } from "antd";
 import "./Updates.css";
 
 function Updates() {
-  const userObj = useSelector((state) => state);
+  const userObj = useSelector((state) => state.reducer);
   const dispatch = useDispatch();
   const [updateArr, setUpdateArr] = useState([]);
   const [noData, setNoData] = useState(false);
@@ -51,10 +51,11 @@ function Updates() {
             {updateArr.length != 0 ? (
               <div className="cardflexwrap">
                 {" "}
-                {updateArr.map((el) => (
+                {updateArr.map((el, i) => (
                   // <div style={{ width:'30%' }} >
                   // </div>
                   <EmployeeUpdatesCard
+                    key={i}
                     data={el}
                     updateArr={updateArr}
                     setUpdateArr={setUpdateArr}

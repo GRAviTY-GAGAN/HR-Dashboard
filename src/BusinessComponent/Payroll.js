@@ -12,7 +12,7 @@ const Payroll = () => {
   const [small, setSmall] = useState(false);
   const [employeeType, setEmp] = useState(2);
 
-  const userObj = useSelector((state) => state);
+  const userObj = useSelector((state) => state.reducer);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -24,7 +24,7 @@ const Payroll = () => {
     <>
       {userObj?.employeeType == 1 ? (
         <>
-          <div className="dashItems"  >
+          <div className="dashItems">
             <div
               className={` ${clickStyle == 1 ? "activeSection" : ""} ${
                 small ? " sections" : " section"
@@ -73,7 +73,7 @@ const Payroll = () => {
               Supply Chain
             </div>
 
-          {clickStyle !== 0 && <PayrollTable clickedBtn={clickStyle} />}
+            {clickStyle !== 0 && <PayrollTable clickedBtn={clickStyle} />}
           </div>
         </>
       ) : (

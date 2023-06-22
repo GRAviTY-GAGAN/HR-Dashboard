@@ -34,7 +34,7 @@ const Signup = () => {
   const [responseToNext, setResponseToNext] = useState(false);
   const [spinner, setSpinner] = useState(false);
 
-  const userObj = useSelector((state) => state);
+  const userObj = useSelector((state) => state.reducer);
   const dispatch = useDispatch();
   console.log("From signUp useSelector", userObj);
 

@@ -6,7 +6,7 @@ import "./EmployeeUpdatesCard.css";
 import { useSelector } from "react-redux";
 
 function EmployeeUpdatesCard({ data, fn, setUpdateArr, updateArr }) {
-  const userObj = useSelector((state) => state);
+  const userObj = useSelector((state) => state.reducer);
 
   const handleDelete = async () => {
     let responseObj = await axios({

@@ -40,7 +40,7 @@ function EmployeeLeave() {
   const [visible, setVisible] = useState(false);
   const [raiseIssueModal, setRaiseIssueModal] = useState(false);
 
-  const userObj = useSelector((state) => state);
+  const userObj = useSelector((state) => state.reducer);
   console.log("consoling userObj", userObj);
   const dispatch = useDispatch();
 

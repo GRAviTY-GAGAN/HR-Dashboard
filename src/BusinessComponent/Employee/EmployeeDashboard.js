@@ -11,13 +11,13 @@ import "./EmployeeDashboard.css";
 import Todo from "../../SmallComponents/Todo";
 
 function EmployeeDashboard() {
-  const userObj = useSelector((state) => state);
+  const userObj = useSelector((state) => state.reducer);
+  const user = useSelector((store) => store.newReducer.user);
+  console.log(user, "NEW RE STORE");
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const [shiftHours, setShiftHours] = useState("");
-
-  console.log(userObj);
 
   const [raiseIssueModal, setRaiseIssueModal] = useState(false);
   const handleRaiseIssue = () => {
@@ -25,7 +25,7 @@ function EmployeeDashboard() {
   };
 
   useEffect(() => {
-    switch (userObj.shiftOfCurrentMonth) {
+    switch (user.shiftOfCurrentMonth) {
       case "1st Shift":
         setShiftHours("7am to 2pm");
         return;
@@ -56,9 +56,9 @@ function EmployeeDashboard() {
               placement="leftTop"
               className="tooltip"
               title={
-                userObj.performanceMessage == ""
+                user.performanceMessage == ""
                   ? "No Performance Message yet"
-                  : userObj.performanceMessage
+                  : user.performanceMessage
               }
               color={true ? "#6075fe" : "red"}
             >
@@ -68,12 +68,10 @@ function EmployeeDashboard() {
                 <div className="progress">
                   <Progress
                     type="circle"
-                    percent={userObj.performanceOfPerviousMonth}
+                    percent={user.performanceOfPerviousMonth}
                     width={120}
                     status={
-                      userObj.performanceOfPerviousMonth < 35
-                        ? "exception "
-                        : ""
+                      user.performanceOfPerviousMonth < 35 ? "exception " : ""
                     }
                   />
                 </div>
@@ -85,9 +83,9 @@ function EmployeeDashboard() {
                 <FcClock fontSize="3rem" />
                 <div className="shifttext">
                   <div style={{ color: "rgb(23, 43, 77)" }}>
-                    {userObj.shiftOfCurrentMonth == ""
+                    {user.shiftOfCurrentMonth == ""
                       ? "Not Allocated"
-                      : userObj.shiftOfCurrentMonth}
+                      : user.shiftOfCurrentMonth}
                   </div>
                   <div style={{ color: "#7bd4fb" }}>{shiftHours} </div>
                 </div>

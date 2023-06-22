@@ -11,7 +11,8 @@ import axios from "axios";
 
 function EmployeePayroll() {
   const [raiseIssueModal, setRaiseIssueModal] = useState(false);
-  const userObj = useSelector((state) => state);
+  const userObj = useSelector((state) => state.reducer);
+  console.log(userObj, "OBJ");
   const dispatch = useDispatch();
 
   const monthlyPay = Math.ceil(userObj.PayrollMangement.salary / 12);

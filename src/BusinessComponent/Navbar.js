@@ -13,7 +13,7 @@ const Navbar = ({ handleCloseSidebar, sidebarClose }) => {
   const [clicked, setClicked] = useState(false);
   const navigate = useNavigate();
 
-  const userObj = useSelector((state) => state);
+  const userObj = useSelector((state) => state.reducer);
   const dispatch = useDispatch();
 
   let location = useLocation();

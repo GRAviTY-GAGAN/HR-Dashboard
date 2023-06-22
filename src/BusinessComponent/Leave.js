@@ -10,7 +10,7 @@ import { Spin } from "antd";
 import emptyimg from "../assests/emptystateforleave.png";
 
 const Leave = () => {
-  const userObj = useSelector((state) => state);
+  const userObj = useSelector((state) => state.reducer);
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -92,8 +92,8 @@ const Leave = () => {
               {noPendingLeaves == false ? (
                 <>
                   {allrequest != [] &&
-                    allrequest?.map((obj) => (
-                      <Card Obj={obj} fetchReq={fetchReq} />
+                    allrequest?.map((obj, i) => (
+                      <Card key={i} Obj={obj} fetchReq={fetchReq} />
                     ))}
                 </>
               ) : (

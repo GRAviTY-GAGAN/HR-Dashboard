@@ -23,7 +23,7 @@ function EmployeePreviousLeave({ pendingObj }) {
 
   const [stopSpinner, setStopSpinner] = useState(false);
 
-  const userObj = useSelector((state) => state);
+  const userObj = useSelector((state) => state.reducer);
   console.log(userObj, "from selector of empprelev", userObj.id);
   const dispatch = useDispatch();
 
@@ -89,6 +89,7 @@ function EmployeePreviousLeave({ pendingObj }) {
         <>
           {" "}
           <div>
+            EmployeePreviousLeave
             <div className="empprevleave__pendingLeavesMain">
               {/* <div > */}
               {data?.length == 0 ? (
@@ -100,7 +101,7 @@ function EmployeePreviousLeave({ pendingObj }) {
                 <>
                   <span className="pendingtxt">Pending Leave Section</span>
                   {data?.map((dataObj, index) => (
-                    <>
+                    <div key={index}>
                       {dataObj.isPending == true && (
                         <>
                           <div
@@ -169,21 +170,20 @@ function EmployeePreviousLeave({ pendingObj }) {
                           </div>
                         </>
                       )}
-                    </>
+                    </div>
                   ))}
                 </>
               )}
             </div>
-
             <div style={{ margin: "1rem" }}>
               <span className="pendingtxt" style={{ marginLeft: "10px" }}>
                 {" "}
                 Previous Leaves{" "}
               </span>{" "}
-              {data.length != 0 ? (
+              {data?.length != 0 ? (
                 <>
-                  {data.map((levObj, index) => (
-                    <>
+                  {data?.map((levObj, index) => (
+                    <div key={index}>
                       <div
                         className="empprevleave__prevlevmain"
                         onClick={() => setDataOfModal(index)}
@@ -228,7 +228,7 @@ function EmployeePreviousLeave({ pendingObj }) {
                           )}
                         </div>
                       </div>
-                    </>
+                    </div>
                   ))}
                 </>
               ) : (
@@ -245,7 +245,6 @@ function EmployeePreviousLeave({ pendingObj }) {
                 </div>
               )}
             </div>
-
             <Modal
               visible={visible}
               title={

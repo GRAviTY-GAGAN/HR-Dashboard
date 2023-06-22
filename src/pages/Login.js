@@ -19,7 +19,7 @@ const Login = () => {
   const [empSpinner, setEmpSpinner] = useState(false);
   const [responseToNext, setResponseToNext] = useState(false);
 
-  const userObj = useSelector((state) => state);
+  const userObj = useSelector((state) => state.reducer);
   const dispatch = useDispatch();
 
   const openNotificationWithIcon = (type, mes, des) => {
@@ -45,6 +45,7 @@ const Login = () => {
         data: userData,
       })
         .then((res) => {
+          console.log(res, "LOGIN");
           if (res.status == 200) {
             if (
               res.data?.errorMessage?.length == 0 ||
@@ -52,6 +53,8 @@ const Login = () => {
             ) {
               setSpinner(false);
               setResponseToNext(true);
+              localStorage.setItem("userDetails", JSON.stringify(res.datamap));
+
               dispatch({
                 type: "login",
                 payload: res.data,

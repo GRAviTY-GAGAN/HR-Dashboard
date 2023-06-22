@@ -144,7 +144,7 @@ const DashboardTableOne = ({ clickedBtn }) => {
 
   const fetchRequest = async () => {
     setLoading(true);
-
+    console.log("REQUEST MADE");
     let deparatmentName = getDeparatmentName(clickedBtn);
     let response = await axios({
       method: "get",
@@ -172,7 +172,7 @@ const DashboardTableOne = ({ clickedBtn }) => {
     let responseObj = await axios({
       method: "post",
       // url: `https://hr-dashboard-nimish.herokuapp.com/admin/performance/${currentEmpId}`,
-      url: `https://hr-dashboard-nimish.herokuapp.com/admin/performance/${currentEmpId}`,
+      url: `http://localhost:5000/admin/performance/${currentEmpId}`,
       data: {
         performanceMessage: text,
         performanceScore: totalScore,
@@ -193,7 +193,8 @@ const DashboardTableOne = ({ clickedBtn }) => {
   async function updateShiftHours() {
     let responseObj = await axios({
       method: "post",
-      url: `https://hr-dashboard-nimish.herokuapp.com/admin/shift/${currentEmpId}`,
+      url: `http://localhost:5000/admin/shift/${currentEmpId}`,
+      // url: `https://hr-dashboard-nimish.herokuapp.com/admin/shift/${currentEmpId}`,
       data: { shift: getValue },
     });
 
