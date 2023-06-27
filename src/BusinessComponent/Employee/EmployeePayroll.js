@@ -15,6 +15,11 @@ function EmployeePayroll() {
   console.log(userObj, "OBJ");
   const dispatch = useDispatch();
 
+  const url =
+    process.env.NODE_ENV == "developemnt"
+      ? process.env.REACT_APP_LOCAL_URL
+      : process.env.REACT_APP_PROD_URL;
+
   const monthlyPay = Math.ceil(userObj.PayrollMangement.salary / 12);
   const dayPay = Math.ceil(monthlyPay / 30);
 
@@ -22,7 +27,7 @@ function EmployeePayroll() {
     let responseObj = await axios({
       method: "post",
       // url: `https://hr-dashboard-nimish.herokuapp.com/admin/salary/${userObj.id}`,
-      url: `http://localhost:5000/admin/salary/${userObj.id}`,
+      url: `${url}/admin/salary/${userObj.id}`,
       data: {
         salary: sal,
       },

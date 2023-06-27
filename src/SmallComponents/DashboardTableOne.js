@@ -32,6 +32,11 @@ const DashboardTableOne = ({ clickedBtn }) => {
   const [currentEmpId, setCurrentEmpId] = useState("");
   const [performanceMessage, setPerformanceMessage] = useState("");
 
+  const url =
+    process.env.NODE_ENV == "developemnt"
+      ? process.env.REACT_APP_LOCAL_URL
+      : process.env.REACT_APP_PROD_URL;
+
   // ------------------------------------------------------------------------------------------------------------------------------
   // --------------------------------------------------------------------------------------------------------------
   const showModal = (record) => {
@@ -149,7 +154,7 @@ const DashboardTableOne = ({ clickedBtn }) => {
     let response = await axios({
       method: "get",
       // url: `https://hr-dashboard-nimish.herokuapp.com/admin/deparatment/${deparatmentName}`,
-      url: `http://localhost:5000/admin/deparatment/${deparatmentName}`,
+      url: `${url}/admin/deparatment/${deparatmentName}`,
     });
     console.log("from frontend Engineering", response.data);
     setAllRequest(response.data);
@@ -172,7 +177,7 @@ const DashboardTableOne = ({ clickedBtn }) => {
     let responseObj = await axios({
       method: "post",
       // url: `https://hr-dashboard-nimish.herokuapp.com/admin/performance/${currentEmpId}`,
-      url: `http://localhost:5000/admin/performance/${currentEmpId}`,
+      url: `${url}/admin/performance/${currentEmpId}`,
       data: {
         performanceMessage: text,
         performanceScore: totalScore,
@@ -193,7 +198,7 @@ const DashboardTableOne = ({ clickedBtn }) => {
   async function updateShiftHours() {
     let responseObj = await axios({
       method: "post",
-      url: `http://localhost:5000/admin/shift/${currentEmpId}`,
+      url: `${url}/admin/shift/${currentEmpId}`,
       // url: `https://hr-dashboard-nimish.herokuapp.com/admin/shift/${currentEmpId}`,
       data: { shift: getValue },
     });

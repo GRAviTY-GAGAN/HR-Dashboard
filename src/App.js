@@ -37,7 +37,7 @@ function App() {
 
   useEffect(() => {
     document.title = "HR-Dashboard";
-    if (localStorage.getItem("userDetails")) {
+    if (JSON.parse(localStorage.getItem("userDetails"))) {
       console.log(JSON.parse(localStorage.getItem("userDetails")));
       const user = JSON.parse(localStorage.getItem("userDetails"));
 

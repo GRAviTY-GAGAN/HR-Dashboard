@@ -18,10 +18,15 @@ function Updates() {
   async function fetchUpdateObj() {
     setNoData(true);
 
+    const url =
+      process.env.NODE_ENV == "developemnt"
+        ? process.env.REACT_APP_LOCAL_URL
+        : process.env.REACT_APP_PROD_URL;
+
     let responseObj = await axios({
       method: "get",
       // url: `https://hr-dashboard-nimish.herokuapp.com/employee/updates/${userObj.id}`,
-      url: `http://localhost:5000/employee/updates/${userObj.id}`,
+      url: `${url}/employee/updates/${userObj.id}`,
     });
 
     console.log(responseObj.data);

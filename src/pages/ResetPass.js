@@ -7,6 +7,11 @@ const ResetPass = () => {
   const navigate = useNavigate();
   const { id } = useParams();
 
+  const url =
+    process.env.NODE_ENV == "developemnt"
+      ? process.env.REACT_APP_LOCAL_URL
+      : process.env.REACT_APP_PROD_URL;
+
   const [api, contextHolder] = notification.useNotification();
   const openNotificationWithIcon = (type, message, description) => {
     api[type]({
@@ -18,7 +23,7 @@ const ResetPass = () => {
   async function resetPassword(value) {
     await axios({
       method: "post",
-      url: `http://localhost:5000/auth/resetPassword/${id}`,
+      url: `${url}/auth/resetPassword/${id}`,
       data: { ...value },
     })
       .then((res) => {

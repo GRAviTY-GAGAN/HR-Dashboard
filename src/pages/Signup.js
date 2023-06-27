@@ -36,7 +36,12 @@ const Signup = () => {
 
   const userObj = useSelector((state) => state.reducer);
   const dispatch = useDispatch();
-  console.log("From signUp useSelector", userObj);
+  // console.log("From signUp useSelector", userObj);
+
+  const url =
+    process.env.NODE_ENV == "developemnt"
+      ? process.env.REACT_APP_LOCAL_URL
+      : process.env.REACT_APP_PROD_URL;
 
   useEffect(() => {
     dispatch({
@@ -59,7 +64,7 @@ const Signup = () => {
       let response = await axios({
         method: "post",
         // url: "https://hr-dashboard-nimish.herokuapp.com/auth/signup",
-        url: "http://localhost:5000/auth/signup",
+        url: `${url}/auth/signup`,
         data: userObj,
       });
 

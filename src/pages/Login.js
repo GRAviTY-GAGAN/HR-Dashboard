@@ -29,6 +29,11 @@ const Login = () => {
     });
   };
 
+  const url =
+    process.env.NODE_ENV == "developemnt"
+      ? process.env.REACT_APP_LOCAL_URL
+      : process.env.REACT_APP_PROD_URL;
+
   const verifyLogin = async (userEmail, userPassword) => {
     setSpinner(true);
     console.log(userEmail, userPassword, "fromFrontEnd");
@@ -41,7 +46,7 @@ const Login = () => {
       let response = await axios({
         method: "post",
         // url: "https://hr-dashboard-nimish.herokuapp.com/auth/login",
-        url: "http://localhost:5000/auth/login",
+        url: `${url}/auth/login`,
         data: userData,
       })
         .then((res) => {
@@ -53,7 +58,7 @@ const Login = () => {
             ) {
               setSpinner(false);
               setResponseToNext(true);
-              localStorage.setItem("userDetails", JSON.stringify(res.datamap));
+              localStorage.setItem("userDetails", JSON.stringify(res.data));
 
               dispatch({
                 type: "login",
@@ -97,7 +102,7 @@ const Login = () => {
       let response = await axios({
         method: "post",
         // url: "https://hr-dashboard-nimish.herokuapp.com/auth/login",
-        url: "http://localhost:5000/auth/login",
+        url: `${url}/auth/login`,
         data: { email: em, password: pass },
       })
         .then((res) => {

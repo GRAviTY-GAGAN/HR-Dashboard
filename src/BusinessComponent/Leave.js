@@ -14,6 +14,11 @@ const Leave = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
+  const url =
+    process.env.NODE_ENV == "developemnt"
+      ? process.env.REACT_APP_LOCAL_URL
+      : process.env.REACT_APP_PROD_URL;
+
   const [stopSpinner, setStopSpinner] = useState(false);
   const [allrequest, setAllRequest] = useState([]);
   const [employeeType, setEmployeeType] = useState(userObj.employeeType);
@@ -24,7 +29,7 @@ const Leave = () => {
       let response = await axios({
         method: "get",
         // url: `https://hr-dashboard-nimish.herokuapp.com/admin/leave`,
-        url: `http://localhost:5000/admin/leave`,
+        url: `${url}/admin/leave`,
       });
 
       console.log(response);
@@ -47,7 +52,7 @@ const Leave = () => {
       let responseObj = axios({
         method: "get",
         // url: "https://hr-dashboard-nimish.herokuapp.com/admin/leave/pending",
-        url: "http://localhost:5000/admin/leave/pending",
+        url: `${url}/admin/leave/pending`,
       }).then((res) => {
         console.log(res.data.length);
         if (res.data.length == 0) {

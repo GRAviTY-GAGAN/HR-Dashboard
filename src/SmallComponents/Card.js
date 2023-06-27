@@ -21,6 +21,11 @@ function Card({ Obj, fetchReq }) {
     setVisible(true);
   };
 
+  const url =
+    process.env.NODE_ENV == "developemnt"
+      ? process.env.REACT_APP_LOCAL_URL
+      : process.env.REACT_APP_PROD_URL;
+
   const handleOk = () => {
     setLoading(true);
     setTimeout(() => {
@@ -60,7 +65,7 @@ function Card({ Obj, fetchReq }) {
       let response = await axios({
         method: "post",
         // url: `https://hr-dashboard-nimish.herokuapp.com/admin/leave/${Obj.leaveId}`,
-        url: `http://localhost:5000/admin/leave/${Obj.leaveId}`,
+        url: `${url}/admin/leave/${Obj.leaveId}`,
         data: { reasonOfRejection: rejectionMessage },
       });
 
@@ -81,7 +86,7 @@ function Card({ Obj, fetchReq }) {
       let response = await axios({
         method: "post",
         // url: `https://hr-dashboard-nimish.herokuapp.com/admin/leave/approve/${Obj.leaveId}`,
-        url: `http://localhost:5000/admin/leave/approve/${Obj.leaveId}`,
+        url: `${url}/admin/leave/approve/${Obj.leaveId}`,
         data: { isApproved: true },
       });
 

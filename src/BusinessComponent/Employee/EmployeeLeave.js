@@ -34,6 +34,11 @@ function EmployeeLeave() {
     leaveId: "",
   };
 
+  const url =
+    process.env.NODE_ENV == "developemnt"
+      ? process.env.REACT_APP_LOCAL_URL
+      : process.env.REACT_APP_PROD_URL;
+
   const [leaveObj, setLeaveObj] = useState(obj);
   const [responseObj, setResponseObj] = useState({});
   const [loading, setLoading] = useState(false);
@@ -49,7 +54,7 @@ function EmployeeLeave() {
     //   `https://hr-dashboard-nimish.herokuapp.com/employee/details/${userObj.id}`
     // );
     let updatedDetails = await axios.get(
-      `http://localhost:5000/employee/details/${userObj.id}`
+      `${url}/employee/details/${userObj.id}`
     );
     dispatch({
       type: "login",
@@ -169,7 +174,7 @@ function EmployeeLeave() {
         let response = await axios({
           method: "post",
           // url: "https://hr-dashboard-nimish.herokuapp.com/admin/leave",
-          url: "http://localhost:5000/admin/leave",
+          url: `${url}/admin/leave`,
           data: leaveObj,
         });
 

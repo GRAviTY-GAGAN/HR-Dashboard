@@ -17,6 +17,11 @@ function Dashboard() {
   const navigate = useNavigate();
   const [returnToLoginPage, setReturnToLoginPage] = useState(false);
 
+  const url =
+    process.env.NODE_ENV == "developemnt"
+      ? process.env.REACT_APP_LOCAL_URL
+      : process.env.REACT_APP_PROD_URL;
+
   //_____this two functions only have the functionality no UI_______________________________________________________________
 
   async function updatePerformance(num1, num2, num3, num4, performanceMessage) {
@@ -28,7 +33,7 @@ function Dashboard() {
     let responseObj = await axios.post({
       method: "post",
       // url: `https://hr-dashboard-nimish.herokuapp.com/admin/performance/${userObj.id}`,
-      url: `http://localhost:5000/admin/performance/${userObj.id}`,
+      url: `${url}/admin/performance/${userObj.id}`,
       data: {
         performanceMessage: performanceMessage,
         performanceScore: totalscore,
@@ -51,7 +56,7 @@ function Dashboard() {
     let responseObj = await axios({
       method: "post",
       // url: `https://hr-dashboard-nimish.herokuapp.com/admin/shift/${userObj.id}`,
-      url: `http://localhost:5000/admin/performance/${userObj.id}`,
+      url: `${url}/admin/performance/${userObj.id}`,
       data: {
         shift: shift,
       },

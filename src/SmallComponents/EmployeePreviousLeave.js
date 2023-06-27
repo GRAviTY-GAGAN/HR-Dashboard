@@ -15,7 +15,12 @@ import { IoMdReturnRight, IoMdReturnLeft } from "react-icons/io";
 import { Modal, Spin } from "antd";
 
 function EmployeePreviousLeave({ pendingObj }) {
-  console.log(pendingObj, "from leave testing in previousleaves");
+  // console.log(pendingObj, "from leave testing in previousleaves");
+
+  const url =
+    process.env.NODE_ENV == "developemnt"
+      ? process.env.REACT_APP_LOCAL_URL
+      : process.env.REACT_APP_PROD_URL;
 
   const [visible, setVisible] = useState(false);
   const [data, setData] = useState([]);
@@ -24,13 +29,13 @@ function EmployeePreviousLeave({ pendingObj }) {
   const [stopSpinner, setStopSpinner] = useState(false);
 
   const userObj = useSelector((state) => state.reducer);
-  console.log(userObj, "from selector of empprelev", userObj.id);
+  // console.log(userObj, "from selector of empprelev", userObj.id);
   const dispatch = useDispatch();
 
-  console.log(
-    Object.keys(pendingObj).length == 0,
-    "from employee previous Leave"
-  );
+  // console.log(
+  //   Object.keys(pendingObj).length == 0,
+  //   "from employee previous Leave"
+  // );
 
   useEffect(() => {
     (async () => {
@@ -38,11 +43,11 @@ function EmployeePreviousLeave({ pendingObj }) {
         let response = await axios({
           method: "get",
           // url: `https://hr-dashboard-nimish.herokuapp.com/admin/leave/${userObj.id}`,
-          url: `http://localhost:5000/admin/leave/${userObj.id}`,
+          url: `${url}/admin/leave/${userObj.id}`,
         });
 
         setData(response.data);
-        console.log(response.data, "useEffect empprelev");
+        // console.log(response.data, "useEffect empprelev");
         response && setStopSpinner(true);
       } catch (error) {
         console.log(error);
