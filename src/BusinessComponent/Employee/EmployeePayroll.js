@@ -11,8 +11,14 @@ import axios from "axios";
 
 function EmployeePayroll() {
   const [raiseIssueModal, setRaiseIssueModal] = useState(false);
-  const userObj = useSelector((state) => state);
+  const userObj = useSelector((state) => state.reducer);
+  // console.log(userObj, "OBJ");
   const dispatch = useDispatch();
+
+  const url =
+    process.env.NODE_ENV == "developemnt"
+      ? process.env.REACT_APP_LOCAL_URL
+      : process.env.REACT_APP_PROD_URL;
 
   const monthlyPay = Math.ceil(userObj.PayrollMangement.salary / 12);
   const dayPay = Math.ceil(monthlyPay / 30);
@@ -21,7 +27,7 @@ function EmployeePayroll() {
     let responseObj = await axios({
       method: "post",
       // url: `https://hr-dashboard-nimish.herokuapp.com/admin/salary/${userObj.id}`,
-      url: `http://localhost:5000/admin/salary/${userObj.id}`,
+      url: `${url}/admin/salary/${userObj.id}`,
       data: {
         salary: sal,
       },
@@ -45,16 +51,14 @@ function EmployeePayroll() {
           className="btnpr editbtn"
           // onClick={updateSalary(10)}
         >
-          {" "}
           <span>
-            {" "}
             <FaEdit
               style={{
                 paddingTop: "7px",
                 fontSize: "20px",
               }}
-            />{" "}
-          </span>{" "}
+            />
+          </span>
           Edit
         </div>
 
@@ -63,7 +67,6 @@ function EmployeePayroll() {
           onClick={() => setRaiseIssueModal(true)}
         >
           <span>
-            {" "}
             <VscWorkspaceUntrusted
               style={{
                 paddingTop: "7px",

@@ -9,7 +9,7 @@ import { Spin } from "antd";
 import "./Updates.css";
 
 function Updates() {
-  const userObj = useSelector((state) => state);
+  const userObj = useSelector((state) => state.reducer);
   const dispatch = useDispatch();
   const [updateArr, setUpdateArr] = useState([]);
   const [noData, setNoData] = useState(false);
@@ -18,13 +18,18 @@ function Updates() {
   async function fetchUpdateObj() {
     setNoData(true);
 
+    const url =
+      process.env.NODE_ENV == "developemnt"
+        ? process.env.REACT_APP_LOCAL_URL
+        : process.env.REACT_APP_PROD_URL;
+
     let responseObj = await axios({
       method: "get",
       // url: `https://hr-dashboard-nimish.herokuapp.com/employee/updates/${userObj.id}`,
-      url: `http://localhost:5000/employee/updates/${userObj.id}`,
+      url: `${url}/employee/updates/${userObj.id}`,
     });
 
-    console.log(responseObj.data);
+    // console.log(responseObj.data);
 
     if (responseObj.data != null) {
       setUpdateArr(responseObj.data.taskCompletedArr);
@@ -42,24 +47,24 @@ function Updates() {
   return (
     <div className="mainupdatectn">
       <div className="dailyupdatestxt"> Daily Updates </div>
-      <>
+      <div>
         {" "}
         {noData == true ? (
           <Spin />
         ) : (
-          <>
+          <div>
             {updateArr.length != 0 ? (
               <div className="cardflexwrap">
-                {" "}
-                {updateArr.map((el) => (
+                {updateArr.map((el, i) => (
                   // <div style={{ width:'30%' }} >
                   // </div>
                   <EmployeeUpdatesCard
+                    key={i}
                     data={el}
                     updateArr={updateArr}
                     setUpdateArr={setUpdateArr}
                   />
-                ))}{" "}
+                ))}
               </div>
             ) : (
               <div>
@@ -72,9 +77,9 @@ function Updates() {
                 </div>
               </div>
             )}
-          </>
+          </div>
         )}{" "}
-      </>
+      </div>
     </div>
   );
 }

@@ -8,19 +8,19 @@
    color: #6075fe;
 }
 
-.imgctn{
+.imgctn {
    display: flex;
    justify-content: center;
    align-items: center;
    width: 100%;
 }
 
-.emptyimg{
+.emptyimg {
    width: 40%;
    height: 50%
 }
 
-.nodatatxt{
+.nodatatxt {
    text-align: center;
    font-size: 1rem;
    color: #6075fe;
@@ -30,9 +30,8 @@
    align-items: center;
 }
 
-.cardflexwrap{
+.cardflexwrap {
    width: 100%;
-   height: 70vh;
    overflow: scroll;
    scroll-behavior: smooth;
    /* border: 1px solid red; */
@@ -40,4 +39,30 @@
    /* align-items: center; */
    flex-wrap: wrap;
    /* justify-content: space-around; */
+}
+
+@media screen and (max-width:500px) {
+   .mainupdatectn {
+      margin: 0rem;
+   }
+
+   .maincardctn {
+      width: 100%;
+      margin-top: 0;
+   }
+
+   .maincardctn:nth-of-type(1) {
+      margin-top: 1rem;
+   }
+
+   .dailyupdatestxt {
+      margin-left: 1rem;
+   }
+
+}
+
+@media screen and (min-width:501px) and (max-width:900px) {
+   .mainupdatectn {
+      margin: 1rem;
+   }
 }

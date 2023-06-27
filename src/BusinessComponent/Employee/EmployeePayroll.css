@@ -7,6 +7,7 @@
    font-size: 20px;
    color: #7bd4fb;
    font-weight: 600;
+   line-height: 30px;
 }
 
 /*--Button style------------------------------------------------------------------------------------------------------------- */
@@ -176,5 +177,10 @@
 @media screen and (max-width:900px) and (min-width:501px) {
    .home__navbar {
       width: 100%;
+   }
+
+   .headingtxt {
+      font-size: 18px;
+      line-height: 20px;
    }
 }

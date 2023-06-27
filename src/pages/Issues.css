@@ -1,0 +1,100 @@
+.Issues__mainCont {
+    margin: 2rem;
+    /* border: 1px solid black; */
+    max-height: 590px;
+    overflow-y: scroll;
+}
+
+.Issues__heading {
+    color: #6075fe;
+    font-weight: 500;
+    font-size: large;
+    margin-bottom: 1rem;
+    padding-top: 0.5rem;
+}
+
+.Issues__issueCard {
+    box-shadow: rgba(0, 0, 0, 0.15) 0px 5px 15px 0px;
+    border-radius: 5px;
+    padding: 1rem;
+    margin: 0 1rem 1rem 1rem;
+}
+
+.Issues__issueCardSub {
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: space-between;
+}
+
+.Issues__FeedbackBtn {
+    background-color: #6075fe;
+    color: white;
+    border: none;
+    padding: 0.2rem 1rem;
+    font-weight: 500;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.Issues__FeedbackBtnCont {
+    margin-top: 1rem;
+}
+
+.Issue__statusName {
+    font-size: 16px;
+    font-weight: 500;
+    color: grey;
+}
+
+.Issue__status {
+    background-color: rgba(255, 0, 0, 60%);
+    padding: 2px 5px 4px 5px;
+    border-radius: 3px;
+    color: white;
+    font-weight: 500;
+}
+
+.resolved {
+    background-color: rgb(103, 171, 103);
+    padding: 2px 5px 4px 5px;
+    border-radius: 3px;
+    color: white;
+    font-weight: 500;
+}
+
+.Issue__IssueDesc {
+    font-size: medium;
+}
+
+.Issues__headingCont {
+    display: flex;
+    justify-content: space-between;
+    padding-top: 0.5rem;
+}
+
+.Issues__pendingCont,
+.Issues__resolveCont {
+    transition: all linear 1s;
+    height: 400px;
+    overflow-y: scroll;
+}
+
+.hide {
+    height: 0px;
+}
+
+.Issues__ClearBtnCont {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.Issues__ClearBtn {
+    padding: 0.5rem;
+    background-color: red;
+    color: white;
+    font-weight: 500;
+    border-radius: 5px;
+    cursor: pointer;
+    border: none;
+}

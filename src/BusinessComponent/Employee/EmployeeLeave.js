@@ -34,14 +34,19 @@ function EmployeeLeave() {
     leaveId: "",
   };
 
+  const url =
+    process.env.NODE_ENV == "developemnt"
+      ? process.env.REACT_APP_LOCAL_URL
+      : process.env.REACT_APP_PROD_URL;
+
   const [leaveObj, setLeaveObj] = useState(obj);
   const [responseObj, setResponseObj] = useState({});
   const [loading, setLoading] = useState(false);
   const [visible, setVisible] = useState(false);
   const [raiseIssueModal, setRaiseIssueModal] = useState(false);
 
-  const userObj = useSelector((state) => state);
-  console.log("consoling userObj", userObj);
+  const userObj = useSelector((state) => state.reducer);
+  // console.log("consoling userObj", userObj);
   const dispatch = useDispatch();
 
   const updateUserDetails = async () => {
@@ -49,7 +54,7 @@ function EmployeeLeave() {
     //   `https://hr-dashboard-nimish.herokuapp.com/employee/details/${userObj.id}`
     // );
     let updatedDetails = await axios.get(
-      `http://localhost:5000/employee/details/${userObj.id}`
+      `${url}/employee/details/${userObj.id}`
     );
     dispatch({
       type: "login",
@@ -155,10 +160,10 @@ function EmployeeLeave() {
   };
 
   const handleApplyLeave = async () => {
-    console.log(leaveObj, "from handle Leave Fn");
+    // console.log(leaveObj, "from handle Leave Fn");
 
     try {
-      console.log(leaveObj.leaveId, "after clicking on the apply leave");
+      // console.log(leaveObj.leaveId, "after clicking on the apply leave");
       if (
         leaveObj.reasonOfLeave != "" &&
         leaveObj.dateOfLeave != "" &&
@@ -169,11 +174,11 @@ function EmployeeLeave() {
         let response = await axios({
           method: "post",
           // url: "https://hr-dashboard-nimish.herokuapp.com/admin/leave",
-          url: "http://localhost:5000/admin/leave",
+          url: `${url}/admin/leave`,
           data: leaveObj,
         });
 
-        console.log(response.status === 200, "response from backend");
+        // console.log(response.status === 200, "response from backend");
 
         response.status === 200 && openNotification("bottomLeft");
         setResponseObj(response.data);
@@ -191,7 +196,7 @@ function EmployeeLeave() {
   };
 
   return (
-    <>
+    <div>
       <div className="employeeLeave__emplevMainCont">
         <div className="employeeLeave__emplev">
           <div className="employeeLeave__levdate">
@@ -328,7 +333,7 @@ function EmployeeLeave() {
       <div className="previousLeaveEMp">
         <EmployeePreviousLeave pendingObj={responseObj} />
       </div>
-    </>
+    </div>
   );
 }
 

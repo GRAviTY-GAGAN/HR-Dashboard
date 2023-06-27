@@ -1,0 +1,14 @@
+.IssueModal__updateBTN {
+    background-color: #6075fe;
+    color: white;
+    padding: 0.2rem 0.5rem 0.4rem 0.5rem;
+    width: fit-content;
+    border-radius: 1px;
+    cursor: pointer;
+}
+
+.IssueModal__updateBTNCont {
+    display: flex;
+    justify-content: end;
+    column-gap: 10px;
+}

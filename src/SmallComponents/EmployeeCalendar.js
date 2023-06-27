@@ -6,11 +6,11 @@ import "antd/dist/antd.css";
 function EmployeeCalendar() {
   const [visible, setVisible] = useState(false);
   const [modal, contextHolder] = Modal.useModal();
-  const dateRef = useRef('');
+  const dateRef = useRef("");
 
   const onSelect = (datefromCalendar) => {
     dateRef.current = datefromCalendar;
-    alert(dateRef)
+    alert(dateRef);
     setVisible(true);
     modal.info(config);
   };
@@ -20,25 +20,25 @@ function EmployeeCalendar() {
   };
 
   const config = {
-    title: `Schedules for ${ dateRef.current }`,
+    title: `Schedules for ${dateRef.current}`,
     content: (
-      <>
-        <div> No Updates for now { dateRef.current }</div>
-      </>
+      <div>
+        <div> No Updates for now {dateRef.current}</div>
+      </div>
     ),
   };
 
   return (
-    <>
+    <div>
       <div className="calendarmain">
         <Calendar
           fullscreen={false}
           style={{ width: "100%" }}
-          onSelect={(date)=>onSelect(date)}
+          onSelect={(date) => onSelect(date)}
         />
       </div>
       {contextHolder}
-    </>
+    </div>
   );
 }
 

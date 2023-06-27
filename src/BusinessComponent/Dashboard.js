@@ -12,10 +12,15 @@ import { notification } from "antd";
 import { useNavigate } from "react-router-dom";
 
 function Dashboard() {
-  const userObj = useSelector((state) => state);
+  const userObj = useSelector((state) => state.reducer);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [returnToLoginPage, setReturnToLoginPage] = useState(false);
+
+  const url =
+    process.env.NODE_ENV == "developemnt"
+      ? process.env.REACT_APP_LOCAL_URL
+      : process.env.REACT_APP_PROD_URL;
 
   //_____this two functions only have the functionality no UI_______________________________________________________________
 
@@ -28,7 +33,7 @@ function Dashboard() {
     let responseObj = await axios.post({
       method: "post",
       // url: `https://hr-dashboard-nimish.herokuapp.com/admin/performance/${userObj.id}`,
-      url: `http://localhost:5000/admin/performance/${userObj.id}`,
+      url: `${url}/admin/performance/${userObj.id}`,
       data: {
         performanceMessage: performanceMessage,
         performanceScore: totalscore,
@@ -50,7 +55,8 @@ function Dashboard() {
   async function updateShift(shift) {
     let responseObj = await axios({
       method: "post",
-      url: `https://hr-dashboard-nimish.herokuapp.com/admin/shift/${userObj.id}`,
+      // url: `https://hr-dashboard-nimish.herokuapp.com/admin/shift/${userObj.id}`,
+      url: `${url}/admin/performance/${userObj.id}`,
       data: {
         shift: shift,
       },
@@ -64,7 +70,7 @@ function Dashboard() {
 
   // _______________________________________________________________________
 
-  console.log("comming from use selector", userObj);
+  // console.log("comming from use selector", userObj);
 
   const [clickStyle, setClickStyle] = useState(0);
 
@@ -73,14 +79,14 @@ function Dashboard() {
 
   useEffect(() => {
     setEmp(userObj.employeeType);
-    console.log(userObj);
+    // console.log(userObj);
   }, []);
 
   return (
-    <>
+    <div>
       {userObj == "logout" && navigate("/")}
       {userObj.employeeType == 1 ? (
-        <>
+        <div>
           <div className="dashItems">
             <div
               className={` ${clickStyle === 1 ? "activeSection" : ""} ${
@@ -128,11 +134,11 @@ function Dashboard() {
             </div>
             {clickStyle != 0 && <DashboardTableOne clickedBtn={clickStyle} />}
           </div>
-        </>
+        </div>
       ) : (
         <div>{userObj.employeeType == 2 && <EmployeeDashboard />}</div>
       )}
-    </>
+    </div>
   );
 }
 

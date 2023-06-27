@@ -26,6 +26,11 @@ function PayrollTable({ clickedBtn }) {
   const [salary, setSalary] = useState(0);
   const [currentEmpId, setCurretEmpId] = useState();
 
+  const url =
+    process.env.NODE_ENV == "developemnt"
+      ? process.env.REACT_APP_LOCAL_URL
+      : process.env.REACT_APP_PROD_URL;
+
   const getDepartmentName = (clickedBtn) => {
     switch (clickedBtn) {
       case 1:
@@ -55,9 +60,9 @@ function PayrollTable({ clickedBtn }) {
     let response = await axios({
       method: "get",
       // url: `https://hr-dashboard-nimish.herokuapp.com/admin/deparatment/${departmentName}`,
-      url: `http://localhost:5000/admin/deparatment/${departmentName}`,
+      url: `${url}/admin/deparatment/${departmentName}`,
     });
-    console.log("from payroll table", response.data);
+    // console.log("from payroll table", response.data);
     setAllRequest(response.data);
 
     response.status == 200 && setLoading(false);
@@ -77,7 +82,7 @@ function PayrollTable({ clickedBtn }) {
         ],
       ]);
     });
-    console.log(mainData[0][1], "from PayrollTable maindata01");
+    // console.log(mainData[0][1], "from PayrollTable maindata01");
   };
   useEffect(() => {
     setMainData([]);
@@ -94,7 +99,7 @@ function PayrollTable({ clickedBtn }) {
     let responseObj = await axios({
       method: "post",
       // url: `https://hr-dashboard-nimish.herokuapp.com/admin/salary/${currentEmpId}`,
-      url: `http://localhost:5000/admin/salary/${currentEmpId}`,
+      url: `${url}/admin/salary/${currentEmpId}`,
       data: {
         salary: salary,
       },
@@ -124,8 +129,8 @@ function PayrollTable({ clickedBtn }) {
     setVisible(true);
     setEmployeeDetails(record);
     setCurretEmpId(record[0]);
-    console.log(record[0]);
-    console.log(record, "record after click");
+    // console.log(record[0]);
+    // console.log(record, "record after click");
   };
 
   const onClick = ({ key }) => {
@@ -136,8 +141,8 @@ function PayrollTable({ clickedBtn }) {
     let monthlySalary = salary / 12;
     let responseObj = await axios({
       method: "post",
-      url: `https://hr-dashboard-nimish.herokuapp.com/admin/salary/credit/${currentEmpId}`,
-      url: `http://localhost:5000/admin/salary/credit/${currentEmpId}`,
+      // url: `https://hr-dashboard-nimish.herokuapp.com/admin/salary/credit/${currentEmpId}`,
+      url: `${url}/admin/salary/credit/${currentEmpId}`,
       data: {},
     });
 

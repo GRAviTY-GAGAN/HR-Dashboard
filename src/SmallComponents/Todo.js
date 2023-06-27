@@ -107,7 +107,7 @@ const Todo = () => {
 
     if (enterTodoDetails !== "" && dueDate !== "" && todoDescription !== "") {
       setStoreAllTodo(copyUpdatedTodoList);
-      console.log(dueDate, "FROM DUE DATE");
+      // console.log(dueDate, "FROM DUE DATE");
       setUpdateActive(!updateActive);
       notification.open({
         message: "Message",
@@ -198,7 +198,7 @@ const Todo = () => {
     //     </ol>
     //   </div>
     // </div>
-    <>
+    <div>
       <div className="todos__empupdates">
         <div className="updatetxts">
           <div className="sendbtnctns"> Add Todo's </div>
@@ -270,7 +270,7 @@ const Todo = () => {
           })}
         </div>
       </div>
-    </>
+    </div>
   );
 };
 

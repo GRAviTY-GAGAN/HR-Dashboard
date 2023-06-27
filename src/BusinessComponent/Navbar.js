@@ -13,7 +13,7 @@ const Navbar = ({ handleCloseSidebar, sidebarClose }) => {
   const [clicked, setClicked] = useState(false);
   const navigate = useNavigate();
 
-  const userObj = useSelector((state) => state);
+  const userObj = useSelector((state) => state.reducer);
   const dispatch = useDispatch();
 
   let location = useLocation();
@@ -23,15 +23,27 @@ const Navbar = ({ handleCloseSidebar, sidebarClose }) => {
     case "/home/dashboard":
       title = "Dashboard";
       break;
+
     case "/home/payroll":
       title = "Payroll";
       break;
+
     case "/home/leave":
       title = "Leave";
       break;
+
+    case "/home/issue":
+      title = "Issues";
+      break;
+
+    case "/home/update":
+      title = "Daily Updates";
+      break;
+
     case "/home/test":
       title = "Quaterly Assessment";
       break;
+
     default:
       title = "Dashboard";
       break;

@@ -15,7 +15,12 @@ import { IoMdReturnRight, IoMdReturnLeft } from "react-icons/io";
 import { Modal, Spin } from "antd";
 
 function EmployeePreviousLeave({ pendingObj }) {
-  console.log(pendingObj, "from leave testing in previousleaves");
+  // console.log(pendingObj, "from leave testing in previousleaves");
+
+  const url =
+    process.env.NODE_ENV == "developemnt"
+      ? process.env.REACT_APP_LOCAL_URL
+      : process.env.REACT_APP_PROD_URL;
 
   const [visible, setVisible] = useState(false);
   const [data, setData] = useState([]);
@@ -23,14 +28,14 @@ function EmployeePreviousLeave({ pendingObj }) {
 
   const [stopSpinner, setStopSpinner] = useState(false);
 
-  const userObj = useSelector((state) => state);
-  console.log(userObj, "from selector of empprelev", userObj.id);
+  const userObj = useSelector((state) => state.reducer);
+  // console.log(userObj, "from selector of empprelev", userObj.id);
   const dispatch = useDispatch();
 
-  console.log(
-    Object.keys(pendingObj).length == 0,
-    "from employee previous Leave"
-  );
+  // console.log(
+  //   Object.keys(pendingObj).length == 0,
+  //   "from employee previous Leave"
+  // );
 
   useEffect(() => {
     (async () => {
@@ -38,11 +43,11 @@ function EmployeePreviousLeave({ pendingObj }) {
         let response = await axios({
           method: "get",
           // url: `https://hr-dashboard-nimish.herokuapp.com/admin/leave/${userObj.id}`,
-          url: `http://localhost:5000/admin/leave/${userObj.id}`,
+          url: `${url}/admin/leave/${userObj.id}`,
         });
 
         setData(response.data);
-        console.log(response.data, "useEffect empprelev");
+        // console.log(response.data, "useEffect empprelev");
         response && setStopSpinner(true);
       } catch (error) {
         console.log(error);
@@ -55,8 +60,8 @@ function EmployeePreviousLeave({ pendingObj }) {
   };
 
   const setDataOfModal = (idx) => {
-    console.log(idx);
-    console.log(data[idx], "after clicking on the previous leaves");
+    // console.log(idx);
+    // console.log(data[idx], "after clicking on the previous leaves");
     setIdx(idx);
     showModal();
   };
@@ -70,9 +75,9 @@ function EmployeePreviousLeave({ pendingObj }) {
   };
 
   return (
-    <>
+    <div>
       {stopSpinner == false ? (
-        <>
+        <div>
           <div
             style={{
               display: "flex",
@@ -84,11 +89,12 @@ function EmployeePreviousLeave({ pendingObj }) {
           >
             <Spin size="large" />
           </div>
-        </>
+        </div>
       ) : (
-        <>
+        <div>
           {" "}
           <div>
+            {/* EmployeePreviousLeave */}
             <div className="empprevleave__pendingLeavesMain">
               {/* <div > */}
               {data?.length == 0 ? (
@@ -97,12 +103,12 @@ function EmployeePreviousLeave({ pendingObj }) {
                   No Pending Leave Request{" "}
                 </div>
               ) : (
-                <>
+                <div>
                   <span className="pendingtxt">Pending Leave Section</span>
                   {data?.map((dataObj, index) => (
-                    <>
+                    <div key={index}>
                       {dataObj.isPending == true && (
-                        <>
+                        <div>
                           <div
                             style={{
                               marginTop: "1rem",
@@ -167,23 +173,22 @@ function EmployeePreviousLeave({ pendingObj }) {
                               </div>
                             </div>
                           </div>
-                        </>
+                        </div>
                       )}
-                    </>
+                    </div>
                   ))}
-                </>
+                </div>
               )}
             </div>
-
             <div style={{ margin: "1rem" }}>
               <span className="pendingtxt" style={{ marginLeft: "10px" }}>
                 {" "}
                 Previous Leaves{" "}
               </span>{" "}
-              {data.length != 0 ? (
-                <>
-                  {data.map((levObj, index) => (
-                    <>
+              {data?.length != 0 ? (
+                <div>
+                  {data?.map((levObj, index) => (
+                    <div key={index}>
                       <div
                         className="empprevleave__prevlevmain"
                         onClick={() => setDataOfModal(index)}
@@ -228,9 +233,9 @@ function EmployeePreviousLeave({ pendingObj }) {
                           )}
                         </div>
                       </div>
-                    </>
+                    </div>
                   ))}
-                </>
+                </div>
               ) : (
                 <div className="flexcls">
                   {" "}
@@ -245,7 +250,6 @@ function EmployeePreviousLeave({ pendingObj }) {
                 </div>
               )}
             </div>
-
             <Modal
               visible={visible}
               title={
@@ -278,7 +282,7 @@ function EmployeePreviousLeave({ pendingObj }) {
                           Approved{" "}
                         </span>
                       ) : (
-                        <>
+                        <div>
                           {data[idx]?.isRejected == true && (
                             <span
                               style={{
@@ -291,7 +295,7 @@ function EmployeePreviousLeave({ pendingObj }) {
                               Rejected{" "}
                             </span>
                           )}
-                        </>
+                        </div>
                       )
                     }{" "}
                   </span>{" "}
@@ -371,9 +375,9 @@ function EmployeePreviousLeave({ pendingObj }) {
               </div>
             </Modal>
           </div>{" "}
-        </>
+        </div>
       )}
-    </>
+    </div>
   );
 }
 

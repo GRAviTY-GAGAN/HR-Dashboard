@@ -6,6 +6,11 @@ import axios from "axios";
 const ForgotPass = () => {
   const navigate = useNavigate();
 
+  const url =
+    process.env.NODE_ENV == "developemnt"
+      ? process.env.REACT_APP_LOCAL_URL
+      : process.env.REACT_APP_PROD_URL;
+
   const [api, contextHolder] = notification.useNotification();
   const openNotificationWithIcon = (type, message, description) => {
     api[type]({
@@ -17,7 +22,7 @@ const ForgotPass = () => {
   const forgotPassword = async (value) => {
     await axios({
       method: "post",
-      url: "http://localhost:5000/auth/forgotPassword",
+      url: `${url}/auth/forgotPassword`,
       data: { ...value },
     })
       .then((res) => {

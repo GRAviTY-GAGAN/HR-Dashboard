@@ -7,10 +7,10 @@ import { BsNewspaper } from "react-icons/bs";
 import { RiMoneyDollarBoxFill } from "react-icons/ri";
 import { useLocation, useNavigate, Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import { MenuFoldOutlined } from "@ant-design/icons";
+import { IssuesCloseOutlined, MenuFoldOutlined } from "@ant-design/icons";
 
 const Siderbar = ({ handleCloseSidebar, sidebarClose }) => {
-  const userObj = useSelector((state) => state);
+  const userObj = useSelector((state) => state.reducer);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const location = useLocation();
@@ -24,7 +24,7 @@ const Siderbar = ({ handleCloseSidebar, sidebarClose }) => {
 
   useEffect(() => {
     let locationName = location?.pathname.split("/")[2];
-    console.log(currentPath);
+    // console.log(currentPath);
     switch (locationName) {
       case "dashboard":
         return handleLocation(1, "dashboard");
@@ -35,13 +35,19 @@ const Siderbar = ({ handleCloseSidebar, sidebarClose }) => {
       case "leave":
         return handleLocation(3, "leave");
 
+      case "update":
+        return handleLocation(4, "update");
+
+      case "issue":
+        return handleLocation(5, "issue");
+
       default:
         return handleLocation(1, "dashboard");
     }
   }, []);
 
   return (
-    <>
+    <div>
       <div
         className={`sidebar__mainCont ${
           sidebarClose ? "sidebar__sidebarClose" : "sidebar__sidebarOpen"
@@ -169,7 +175,27 @@ const Siderbar = ({ handleCloseSidebar, sidebarClose }) => {
                   </Link>
                 </div>
               ) : null}
-
+              <Link to="/home/issue">
+                <li
+                  onClick={() => {
+                    setClickStyle(5);
+                  }}
+                  className={`${clickStyle == 5 ? "item active" : "item "}`}
+                >
+                  <div className="sidebarText">
+                    {" "}
+                    <IssuesCloseOutlined
+                      style={{
+                        color: "#A4A6B3",
+                        fontSize: "1rem",
+                        marginRight: "5px",
+                        color: `${clickStyle == 5 ? "white" : "#A4A6B3"}`,
+                      }}
+                    />{" "}
+                    Issues{" "}
+                  </div>
+                </li>
+              </Link>
               {/* <Link to="/home/test">
                 <li
                   onClick={() => {
@@ -195,7 +221,7 @@ const Siderbar = ({ handleCloseSidebar, sidebarClose }) => {
           </div>
         </aside>
       </div>
-    </>
+    </div>
   );
 };
 

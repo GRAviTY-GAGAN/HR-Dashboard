@@ -10,9 +10,14 @@ import { Spin } from "antd";
 import emptyimg from "../assests/emptystateforleave.png";
 
 const Leave = () => {
-  const userObj = useSelector((state) => state);
+  const userObj = useSelector((state) => state.reducer);
   const dispatch = useDispatch();
   const navigate = useNavigate();
+
+  const url =
+    process.env.NODE_ENV == "developemnt"
+      ? process.env.REACT_APP_LOCAL_URL
+      : process.env.REACT_APP_PROD_URL;
 
   const [stopSpinner, setStopSpinner] = useState(false);
   const [allrequest, setAllRequest] = useState([]);
@@ -24,10 +29,10 @@ const Leave = () => {
       let response = await axios({
         method: "get",
         // url: `https://hr-dashboard-nimish.herokuapp.com/admin/leave`,
-        url: `http://localhost:5000/admin/leave`,
+        url: `${url}/admin/leave`,
       });
 
-      console.log(response);
+      // console.log(response);
       setAllRequest(response?.data);
       response && setStopSpinner(true);
     } catch (error) {
@@ -37,7 +42,7 @@ const Leave = () => {
 
   useEffect(() => {
     fetchReq();
-    console.log("user obj from leave.js --> ", userObj);
+    // console.log("user obj from leave.js --> ", userObj);
     setEmployeeType(userObj.employeeType);
     getPending();
   }, []);
@@ -47,9 +52,9 @@ const Leave = () => {
       let responseObj = axios({
         method: "get",
         // url: "https://hr-dashboard-nimish.herokuapp.com/admin/leave/pending",
-        url: "http://localhost:5000/admin/leave/pending",
+        url: `${url}/admin/leave/pending`,
       }).then((res) => {
-        console.log(res.data.length);
+        // console.log(res.data.length);
         if (res.data.length == 0) {
           setNoPendingLeaves(true);
         } else {
@@ -68,7 +73,7 @@ const Leave = () => {
         <div className="mainstyle">
           <div className="heading"> Leave Management </div>
           {stopSpinner == false ? (
-            <>
+            <div>
               <div
                 style={{
                   display: "flex",
@@ -86,16 +91,16 @@ const Leave = () => {
                   </span>
                 </h1>
               </div>
-            </>
+            </div>
           ) : (
             <div style={{ height: "65vh", overflow: "scroll" }}>
               {noPendingLeaves == false ? (
-                <>
+                <div>
                   {allrequest != [] &&
-                    allrequest?.map((obj) => (
-                      <Card Obj={obj} fetchReq={fetchReq} />
+                    allrequest?.map((obj, i) => (
+                      <Card key={i} Obj={obj} fetchReq={fetchReq} />
                     ))}
-                </>
+                </div>
               ) : (
                 <div>
                   <div

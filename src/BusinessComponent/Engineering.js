@@ -3,7 +3,7 @@ import { Table, Radio, Space, Modal } from "antd";
 import "antd/dist/antd.min.css";
 import "./Engineering.css";
 import axios from "axios";
-import { useLocation } from 'react-router-dom';
+import { useLocation } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 
 const Engineering = () => {
@@ -14,21 +14,29 @@ const Engineering = () => {
   const [employeeDetails, setEmployeeDetails] = useState({});
 
   const navigate = useNavigate();
-  console.log(navigate, "Engineering-Navigate");
+  // console.log(navigate, "Engineering-Navigate");
+
+  const url =
+    process.env.NODE_ENV == "developemnt"
+      ? process.env.REACT_APP_LOCAL_URL
+      : process.env.REACT_APP_PROD_URL;
 
   const location = useLocation();
-  console.log(location.pathname.split("/")[location.pathname.split("/").length-1], 'Engineering-location');
+  // console.log(
+  //   location.pathname.split("/")[location.pathname.split("/").length - 1],
+  //   "Engineering-location"
+  // );
 
   const fetchRequest = async () => {
     let response = await axios({
       method: "get",
-      url: "http://localhost:5000/admin/leave",
+      url: `${url}/admin/leave`,
       headers: {
         "Content-Type": "application/json",
         "Access-Control-Allow-Credentials": "true",
       },
     });
-    console.log("from frontend Engineering",response.data);
+    // console.log("from frontend Engineering", response.data);
     setAllRequest(response.data);
   };
 
@@ -37,7 +45,7 @@ const Engineering = () => {
   }, []);
 
   const onChange = (e) => {
-    console.log("radio checked", e.target.value);
+    // console.log("radio checked", e.target.value);
     setGetValue(e.target.value);
   };
 
@@ -58,12 +66,15 @@ const Engineering = () => {
     setEmployeeModal(false);
   };
 
-const updateDetails = () => {
-  setEmployeeDetails({...employeeDetails, shift: getValue , remainingLeaves: 105})
-  console.log(getValue);
-  console.log(employeeDetails);
-}
-
+  const updateDetails = () => {
+    setEmployeeDetails({
+      ...employeeDetails,
+      shift: getValue,
+      remainingLeaves: 105,
+    });
+    // console.log(getValue);
+    // console.log(employeeDetails);
+  };
 
   // const data = [{
   //     id : 1,
@@ -156,9 +167,6 @@ const updateDetails = () => {
               },
             };
           }}
-          
-
-
         ></Table>
       </div>
 
@@ -170,9 +178,12 @@ const updateDetails = () => {
         footer={[
           <div className="btncontainermodal">
             <div className="btnmodal approve">
-              <div onClick={updateDetails} className="btntext"> Update </div>
+              <div onClick={updateDetails} className="btntext">
+                {" "}
+                Update{" "}
+              </div>
             </div>
-          </div>
+          </div>,
         ]}
       >
         <div className="empDetails">

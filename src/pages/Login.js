@@ -19,7 +19,7 @@ const Login = () => {
   const [empSpinner, setEmpSpinner] = useState(false);
   const [responseToNext, setResponseToNext] = useState(false);
 
-  const userObj = useSelector((state) => state);
+  const userObj = useSelector((state) => state.reducer);
   const dispatch = useDispatch();
 
   const openNotificationWithIcon = (type, mes, des) => {
@@ -29,22 +29,28 @@ const Login = () => {
     });
   };
 
+  const url =
+    process.env.NODE_ENV == "developemnt"
+      ? process.env.REACT_APP_LOCAL_URL
+      : process.env.REACT_APP_PROD_URL;
+
   const verifyLogin = async (userEmail, userPassword) => {
     setSpinner(true);
-    console.log(userEmail, userPassword, "fromFrontEnd");
+    // console.log(userEmail, userPassword, "fromFrontEnd");
     userData.email = userEmail;
     userData.password = userPassword;
     setUserData(userData);
-    console.log(userData, "fromfrontend");
+    // console.log(userData, "fromfrontend");
 
     try {
       let response = await axios({
         method: "post",
         // url: "https://hr-dashboard-nimish.herokuapp.com/auth/login",
-        url: "http://localhost:5000/auth/login",
+        url: `${url}/auth/login`,
         data: userData,
       })
         .then((res) => {
+          console.log(res, "LOGIN");
           if (res.status == 200) {
             if (
               res.data?.errorMessage?.length == 0 ||
@@ -52,9 +58,16 @@ const Login = () => {
             ) {
               setSpinner(false);
               setResponseToNext(true);
+              localStorage.setItem(
+                "userDetails",
+                JSON.stringify(res.data.user)
+              );
+
+              localStorage.setItem("token", res.data.token);
+
               dispatch({
                 type: "login",
-                payload: res.data,
+                payload: res.data.user,
               });
             } else {
               openNotificationWithIcon(
@@ -64,7 +77,7 @@ const Login = () => {
               );
               setSpinner(false);
             }
-            console.log(res, "from line no 46 response");
+            // console.log(res, "from line no 46 response");
           } else {
             //Notification of somethin went wrong please try again
             openNotificationWithIcon(
@@ -94,7 +107,7 @@ const Login = () => {
       let response = await axios({
         method: "post",
         // url: "https://hr-dashboard-nimish.herokuapp.com/auth/login",
-        url: "http://localhost:5000/auth/login",
+        url: `${url}/auth/login`,
         data: { email: em, password: pass },
       })
         .then((res) => {
@@ -120,7 +133,7 @@ const Login = () => {
               );
               setSpinner(false);
             }
-            console.log(res, "from line no 46 response");
+            // console.log(res, "from line no 46 response");
           } else {
             //Notification of somethin went wrong please try again
             openNotificationWithIcon(
@@ -214,10 +227,10 @@ const Login = () => {
                   {spinner == false ? (
                     "Log In"
                   ) : (
-                    <>
+                    <div>
                       {" "}
                       <Spin tip="Logging In..." />{" "}
-                    </>
+                    </div>
                   )}
                 </motion.div>
               </Button>
@@ -237,10 +250,10 @@ const Login = () => {
                   {adminSpinner == false ? (
                     "Guest Admin"
                   ) : (
-                    <>
+                    <div>
                       {" "}
                       <Spin tip="Logging In..." />{" "}
-                    </>
+                    </div>
                   )}
                 </motion.div>
               </Button>
@@ -258,10 +271,10 @@ const Login = () => {
                   {empSpinner == false ? (
                     "Guest Employee"
                   ) : (
-                    <>
+                    <div>
                       {" "}
                       <Spin tip="Logging In..." />{" "}
-                    </>
+                    </div>
                   )}
                 </motion.div>
               </Button>

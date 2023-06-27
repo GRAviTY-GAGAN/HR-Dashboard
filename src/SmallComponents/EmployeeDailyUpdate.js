@@ -13,8 +13,13 @@ import Todo from "./Todo";
 const { TextArea } = Input;
 
 function EmployeeDailyUpdate() {
-  const userObj = useSelector((state) => state);
+  const userObj = useSelector((state) => state.reducer);
   const dispatch = useDispatch();
+
+  const url =
+    process.env.NODE_ENV == "developemnt"
+      ? process.env.REACT_APP_LOCAL_URL
+      : process.env.REACT_APP_PROD_URL;
 
   let tempUpdateObj = {
     taskHeading: "",
@@ -70,10 +75,10 @@ function EmployeeDailyUpdate() {
       let res = await axios({
         method: "post",
         // url: `https://hr-dashboard-nimish.herokuapp.com/employee/updatetask/${userObj.id}`,
-        url: `http://localhost:5000/employee/updatetask/${userObj.id}`,
+        url: `${url}/employee/updatetask/${userObj.id}`,
         data: updateTaskObj,
       });
-      console.log(res.status === 200);
+      // console.log(res.status === 200);
       setupdateTaskObj(tempUpdateObj);
 
       if (res.status === 200) {

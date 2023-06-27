@@ -32,7 +32,7 @@ const initialState = JSON.parse(localStorage.getItem("User")) || {
   paidLeavesRemaining: 12,
   tasksOfTheMonth: 0,
   tasksCompletedInMonth: 0,
-  performanceOfPerviousMonth: 100,
+  performanceOfPerviousMonth: 0,
   performanceMessage: "",
   shiftOfCurrentMonth: "",
 
@@ -76,7 +76,7 @@ let signInObj = {
 };
 
 export const reducer = (state = initialState, action) => {
-  console.log(action.type, action, "from reducer");
+  // console.log(action.type, action, "from reducer");
 
   switch (action.type) {
     case SIGNIN:

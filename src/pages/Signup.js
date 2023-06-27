@@ -34,9 +34,14 @@ const Signup = () => {
   const [responseToNext, setResponseToNext] = useState(false);
   const [spinner, setSpinner] = useState(false);
 
-  const userObj = useSelector((state) => state);
+  const userObj = useSelector((state) => state.reducer);
   const dispatch = useDispatch();
-  console.log("From signUp useSelector", userObj);
+  // console.log("From signUp useSelector", userObj);
+
+  const url =
+    process.env.NODE_ENV == "developemnt"
+      ? process.env.REACT_APP_LOCAL_URL
+      : process.env.REACT_APP_PROD_URL;
 
   useEffect(() => {
     dispatch({
@@ -52,18 +57,18 @@ const Signup = () => {
   };
 
   const verifySignup = async (userDataObj) => {
-    console.log(userDataObj, "USEROBJ");
+    // console.log(userDataObj, "USEROBJ");
     try {
-      console.log(userDataObj, "<--- user Object ");
+      // console.log(userDataObj, "<--- user Object ");
 
       let response = await axios({
         method: "post",
         // url: "https://hr-dashboard-nimish.herokuapp.com/auth/signup",
-        url: "http://localhost:5000/auth/signup",
+        url: `${url}/auth/signup`,
         data: userObj,
       });
 
-      console.log("comming from Backend", response);
+      // console.log("comming from Backend", response);
 
       dispatch({
         type: ID,
@@ -301,7 +306,7 @@ const Signup = () => {
                 //   dispatch({ type: DEP, deparatment: e.target.value });
                 // }}
                 onChange={(e) => {
-                  console.log(e, "from inside select");
+                  // console.log(e, "from inside select");
                   dispatch({ type: DEP, deparatment: e });
                 }}
                 allowClear
@@ -365,10 +370,10 @@ const Signup = () => {
                     {spinner == false ? (
                       "Sign up"
                     ) : (
-                      <>
+                      <div>
                         {" "}
                         <Spin tip="Signing In..." />{" "}
-                      </>
+                      </div>
                     )}
                   </motion.div>
                 </Button>

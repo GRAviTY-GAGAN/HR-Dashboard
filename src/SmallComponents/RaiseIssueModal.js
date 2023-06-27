@@ -1,12 +1,16 @@
-import React from "react";
+import React, { useState } from "react";
 import { Modal, Input, notification } from "antd";
 import { TiTick } from "react-icons/ti";
+import { raiseIssue } from "../Utility/raiseIssue";
+import { ExclamationCircleOutlined } from "@ant-design/icons";
 
 const { TextArea } = Input;
 
 function RaiseIssueModal({ raiseIssueModal, setRaiseIssueModal }) {
-  const handleIssue = (text) => {
+  const [issueData, setIssueData] = useState("");
 
+  const handleIssue = (text) => {
+    setIssueData(text);
   };
 
   const handleOk = () => {
@@ -18,17 +22,54 @@ function RaiseIssueModal({ raiseIssueModal, setRaiseIssueModal }) {
   };
 
   const handleUpdate = () => {
-    setTimeout(() => {
+    if (issueData) {
       setRaiseIssueModal(false);
+      raiseIssue(issueData)
+        .then((res) => {
+          // console.log("HER", res);
+          setIssueData("");
+          if (res.statusText == "Saved") {
+            notification.open({
+              message: "Your Issue has been sent to the Admin!",
+              icon: <TiTick style={{ fontSize: "1.5rem", color: "#4BB543" }} />,
+            });
+          } else {
+            console.log(res.data);
+            notification.open({
+              message: "Something went wrong.",
+              icon: (
+                <ExclamationCircleOutlined
+                  style={{ fontSize: "1.5rem", color: "red" }}
+                />
+              ),
+            });
+          }
+        })
+        .catch((err) => {
+          console.log(err);
+          notification.open({
+            message: "Something went wrong.",
+            icon: (
+              <ExclamationCircleOutlined
+                style={{ fontSize: "1.5rem", color: "red" }}
+              />
+            ),
+          });
+        });
+    } else {
       notification.open({
-        message: "Your Issue has been sent to the Admin!",
-        icon: <TiTick style={{ fontSize: "1.5rem", color: "#4BB543" }} />,
+        message: "Issue cannot be empty.",
+        icon: (
+          <ExclamationCircleOutlined
+            style={{ fontSize: "1.5rem", color: "red" }}
+          />
+        ),
       });
-    }, 200);
+    }
   };
 
   return (
-    <>
+    <div>
       <Modal
         title="This message will be sent to the admin"
         visible={raiseIssueModal}
@@ -49,7 +90,7 @@ function RaiseIssueModal({ raiseIssueModal, setRaiseIssueModal }) {
           minLength={60}
         />
       </Modal>
-    </>
+    </div>
   );
 }
 
