@@ -15,7 +15,7 @@ const IssueModal = ({ issueModalOpen, setIssueModalOpen, id, fetchIssues }) => {
     setIssueModalOpen(false);
     issueUpdate(id, feedback)
       .then((res) => {
-        console.log(res);
+        // console.log(res);
 
         if (res.statusText == "Success") {
           api.open({

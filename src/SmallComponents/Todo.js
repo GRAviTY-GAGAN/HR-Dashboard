@@ -6,8 +6,9 @@ import TodoCard from "./TodoCard";
 import { DatePicker, notification } from "antd";
 import TextArea from "antd/lib/input/TextArea";
 import moment from "moment";
-import { AlertOutlined } from "@ant-design/icons";
+import { AlertOutlined, ExceptionOutlined } from "@ant-design/icons";
 import { TiTick } from "react-icons/ti";
+import axios from "axios";
 
 const Todo = () => {
   const dateFormatList = ["DD/MM/YYYY", "DD/MM/YY"];
@@ -18,31 +19,95 @@ const Todo = () => {
   const [updateActive, setUpdateActive] = useState(false);
   const [storeSingleTodo, setStoreSingleTodo] = useState({});
 
-  const handleAddTodo = () => {
-    if (dueDate !== "" && enterTodoDetails !== "" && todoDescription !== "") {
-      setStoreAllTodo([
-        ...storeAllTodo,
-        {
-          id: uuidv4(),
-          title: enterTodoDetails,
-          date: dueDate,
-          description: todoDescription,
+  const url =
+    process.env.NODE_ENV == "developemnt"
+      ? process.env.REACT_APP_LOCAL_URL
+      : process.env.REACT_APP_PROD_URL;
+
+  useEffect(() => {
+    fetchTodosData();
+  }, []);
+
+  function fetchTodosData() {
+    axios
+      .get(`${url}/todo/`, {
+        headers: {
+          "Content-Type": "application/json",
+          authorization: `Bearer ${localStorage.getItem("token")}`,
         },
-      ]);
-      notification.open({
-        message: "Message",
-        description: "Your tasks are saved",
-        icon: (
-          <TiTick
-            style={{
-              color: "#4BB543",
-            }}
-          />
-        ),
+      })
+      .then((res) => {
+        // console.log(res, "GEtting tods");
+        if (res.data.todos) {
+          setStoreAllTodo(res.data.todos);
+        }
+      })
+      .catch((err) => {
+        console.log(err);
       });
-      setDueDate("");
-      setTodoDescription("");
-      setEnterTodoDetails("");
+  }
+
+  const handleAddTodo = () => {
+    const data = {
+      date: dueDate,
+      title: enterTodoDetails,
+      desc: todoDescription,
+    };
+
+    if (dueDate !== "" && enterTodoDetails !== "" && todoDescription !== "") {
+      axios
+        .post(`${url}/todo/`, data, {
+          headers: {
+            "Content-Type": "application/json",
+            authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+        })
+        .then((res) => {
+          // console.log(res);
+          if (res.statusText == "Success") {
+            notification.open({
+              message: "Message",
+              description: "Your tasks are saved",
+              icon: (
+                <TiTick
+                  style={{
+                    color: "#4BB543",
+                  }}
+                />
+              ),
+            });
+            fetchTodosData();
+            setDueDate("");
+            setTodoDescription("");
+            setEnterTodoDetails("");
+          } else {
+            notification.open({
+              message: "Something went wrong.",
+              description: "Try again.",
+              icon: (
+                <ExceptionOutlined
+                  style={{
+                    color: "red",
+                  }}
+                />
+              ),
+            });
+          }
+        })
+        .catch((err) => {
+          console.log(err);
+          notification.open({
+            message: "Something went wrong.",
+            description: "Try again.",
+            icon: (
+              <ExceptionOutlined
+                style={{
+                  color: "red",
+                }}
+              />
+            ),
+          });
+        });
     } else {
       notification.open({
         message: "Alert",
@@ -68,23 +133,76 @@ const Todo = () => {
   };
 
   const handleDelete = (id) => {
-    setStoreAllTodo((oldItems) => {
-      return oldItems.filter((todo) => {
-        return todo.id !== id;
+    axios
+      .delete(`${url}/todo/${id}`, {
+        headers: {
+          "Content-Type": "application/json",
+          authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      })
+      .then((res) => {
+        // console.log(res);
+        if (res.statusText == "Success") {
+          notification.open({
+            message: "Alert",
+            description: "Todo Deleted",
+            icon: (
+              <AlertOutlined
+                style={{
+                  color: "red",
+                }}
+              />
+            ),
+          });
+          fetchTodosData();
+        } else {
+          notification.open({
+            message: "Something went wrong.",
+            description: "Try again.",
+            icon: (
+              <ExceptionOutlined
+                style={{
+                  color: "red",
+                }}
+              />
+            ),
+          });
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+        notification.open({
+          message: "Something went wrong.",
+          description: "Try again.",
+          icon: (
+            <ExceptionOutlined
+              style={{
+                color: "red",
+              }}
+            />
+          ),
+        });
       });
-    });
-    notification.open({
-      message: "Alert",
-      description: "Todo Deleted",
-      icon: (
-        <AlertOutlined
-          style={{
-            color: "red",
-          }}
-        />
-      ),
-    });
   };
+
+  // const handleDelete = (id) => {
+  //   setStoreAllTodo((oldItems) => {
+  //     return oldItems.filter((todo) => {
+  //       return todo.id !== id;
+  //     });
+  //   });
+  //   notification.open({
+  //     message: "Alert",
+  //     description: "Todo Deleted",
+  //     icon: (
+  //       <AlertOutlined
+  //         style={{
+  //           color: "red",
+  //         }}
+  //       />
+  //     ),
+  //   });
+  // };
 
   const handleEdit = (todo) => {
     setEnterTodoDetails(todo.title);
@@ -258,8 +376,8 @@ const Todo = () => {
           {storeAllTodo.map((todo) => {
             return (
               <TodoCard
-                key={todo.id}
-                id={todo.id}
+                key={todo._id}
+                id={todo._id}
                 handleEdit={handleEdit}
                 handleDelete={handleDelete}
                 handleUpdateTodo={handleUpdateTodo}

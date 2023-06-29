@@ -34,7 +34,7 @@ function RaiseIssueModal({ raiseIssueModal, setRaiseIssueModal }) {
               icon: <TiTick style={{ fontSize: "1.5rem", color: "#4BB543" }} />,
             });
           } else {
-            console.log(res.data);
+            // console.log(res.data);
             notification.open({
               message: "Something went wrong.",
               icon: (

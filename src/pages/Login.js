@@ -1,11 +1,13 @@
 import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import axios from "axios";
-import { Link, Navigate } from "react-router-dom";
+import { Link, Navigate, useNavigate } from "react-router-dom";
 
 import { Form, Input, Button, Spin, notification } from "antd";
 import "./Login.css";
 import { motion } from "framer-motion";
+import { USER_DETAILS } from "../redux/MyNewReducer/actionTypes";
+import { SmileOutlined } from "@ant-design/icons";
 
 const Login = () => {
   const [form] = Form.useForm();
@@ -21,6 +23,10 @@ const Login = () => {
 
   const userObj = useSelector((state) => state.reducer);
   const dispatch = useDispatch();
+
+  const navigate = useNavigate();
+
+  const [api, contextHolder] = notification.useNotification();
 
   const openNotificationWithIcon = (type, mes, des) => {
     notification[type]({
@@ -50,7 +56,7 @@ const Login = () => {
         data: userData,
       })
         .then((res) => {
-          console.log(res, "LOGIN");
+          // console.log(res, "LOGIN");
           if (res.status == 200) {
             if (
               res.data?.errorMessage?.length == 0 ||
@@ -69,6 +75,36 @@ const Login = () => {
                 type: "login",
                 payload: res.data.user,
               });
+              dispatch({
+                type: USER_DETAILS,
+                payload: res.data.user,
+              });
+
+              api.open({
+                message: "Login Successful",
+                // description:
+                //   'This is the content of the notification. This is the content of the notification. This is the content of the notification.',
+                icon: (
+                  <SmileOutlined
+                    style={{
+                      color: "#108ee9",
+                    }}
+                  />
+                ),
+              });
+
+              if (res.data.user.employeeType == 1) {
+                // userObj.employeeType == 1
+                //       ? "/home/dashboard"
+                //       : "/home/employee/dashboard"
+                setTimeout(() => {
+                  navigate("/home/dashboard");
+                }, 2000);
+              } else {
+                setTimeout(() => {
+                  navigate("/home/employee/dashboard");
+                }, 2000);
+              }
             } else {
               openNotificationWithIcon(
                 "error",
@@ -90,9 +126,13 @@ const Login = () => {
         })
         .catch((err) => {
           alert(err);
+        })
+        .finally(() => {
+          setSpinner(false);
         });
     } catch (error) {
       console.log("error while logging in ", error);
+      setSpinner(false);
     }
   };
 
@@ -154,6 +194,7 @@ const Login = () => {
 
   return (
     <div className="login">
+      {contextHolder}
       <div className="login__container">
         <div className="cont1">
           <p
@@ -205,7 +246,7 @@ const Login = () => {
               />
             </Form.Item>
             <Form.Item>
-              {responseToNext == true && (
+              {/* {responseToNext == true && (
                 <Navigate
                   to={
                     userObj.employeeType == 1
@@ -213,7 +254,7 @@ const Login = () => {
                       : "/home/employee/dashboard"
                   }
                 />
-              )}
+              )} */}
               <Button
                 onClick={() => verifyLogin(userEmail, userPassword)}
                 className="login-button"

@@ -1,5 +1,5 @@
 .singleTodoMainContainer {
-    margin-top: 0.8rem ;
+    margin-top: 0.8rem;
     /* background-color: #dee4eb; */
     background-color: white;
     border-radius: 8px;
@@ -22,7 +22,7 @@
 .singleTodo {
     /* display: flex;
     justify-content: space-between; */
-    margin-top: 1rem;
+    /* margin-top: 1rem; */
     /* max-width: 28.8rem; */
     width: 100%;
     font-size: 1rem;
@@ -30,17 +30,17 @@
     /* border: 2px solid black; */
 }
 
-.titleDate{
+.titleDate {
     display: flex;
     justify-content: space-between;
     /* max-width: 28.75rem;
     min-width: 28.75rem; */
 }
 
-.maintxt{
+.maintxt {
     font-size: 1rem;
     color: #6075fe;
-    font-weight:600;
+    font-weight: 600;
 }
 
 
@@ -51,7 +51,8 @@
     /* flex-direction: column; */
     justify-content: center;
     /* margin-left: 1rem; */
-    margin:1rem;
+    margin: 1rem 0 0 0;
+    gap: 2rem;
     align-items: center;
     /* border: 2px solid black; */
     /* visibility:hidden; */

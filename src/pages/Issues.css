@@ -70,6 +70,7 @@
     display: flex;
     justify-content: space-between;
     padding-top: 0.5rem;
+    align-items: center;
 }
 
 .Issues__pendingCont,
@@ -97,4 +98,26 @@
     border-radius: 5px;
     cursor: pointer;
     border: none;
+    min-width: 183px;
+}
+
+.Issue__spanHead {
+    font-weight: 500;
+    color: grey;
+}
+
+@media screen and (max-width:500px) {
+    .Issues__mainCont {
+        margin: 1rem;
+    }
+
+    .Issues__issueCardSub {
+        flex-direction: column;
+    }
+
+    .Issue__IssueStatusFlex {
+        display: flex;
+        justify-content: end;
+    }
+
 }

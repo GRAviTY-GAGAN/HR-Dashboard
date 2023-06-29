@@ -153,6 +153,10 @@ export const reducer = (state = initialState, action) => {
       return action.payload;
     }
 
+    case "reset": {
+      return signInObj;
+    }
+
     default: {
       return state;
     }

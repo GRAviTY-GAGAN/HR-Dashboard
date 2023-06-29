@@ -20,6 +20,7 @@ import {
 import { Button, Form, Input, Select, notification, Spin } from "antd";
 import { motion } from "framer-motion";
 import "./Signup.css";
+import { ExceptionOutlined, SmileOutlined } from "@ant-design/icons";
 
 const { Option } = Select;
 
@@ -49,7 +50,7 @@ const Signup = () => {
     });
   }, []);
 
-  const openNotificationWithIcon = (type, mes, des) => {
+  const openNotificationWithIcon = (type, mes, des = "") => {
     api[type]({
       message: mes,
       description: des,
@@ -68,8 +69,6 @@ const Signup = () => {
         data: userObj,
       });
 
-      // console.log("comming from Backend", response);
-
       dispatch({
         type: ID,
         id: response.data.id,
@@ -84,6 +83,7 @@ const Signup = () => {
         `${error.response.data.msg}`
       );
       setSpinner(false);
+      dispatch({ type: "reset" });
       setTimeout(() => {
         navigate("/signup");
       }, 20);
@@ -100,6 +100,74 @@ const Signup = () => {
     //   setSpinner(false);
     // }
   };
+
+  function handleSignup() {
+    // console.log(userObj, "USER");
+    setSpinner(true);
+    axios
+      .post(`${url}/auth/signup`, userObj)
+      .then((res) => {
+        if (res.statusText == "Success") {
+          dispatch({
+            type: ID,
+            id: res.data.id,
+          });
+          setResponseToNext(true);
+          // openNotificationWithIcon("Success", "User Signedup.");
+          api.open({
+            message: "User Signedup",
+            // description:
+            //   'This is the content of the notification. This is the content of the notification. This is the content of the notification.',
+            icon: (
+              <SmileOutlined
+                style={{
+                  color: "#108ee9",
+                }}
+              />
+            ),
+          });
+          setTimeout(() => {
+            navigate("/");
+          }, 2000);
+        } else {
+          // console.log(res, "JAKAJKSD");
+          // openNotificationWithIcon("error", "Please try again");
+          api.open({
+            message: `${res.data.msg}`,
+            // description:
+            //   "This is the content of the notification. This is the content of the notification. This is the content of the notification.",
+            icon: (
+              <ExceptionOutlined
+                style={{
+                  color: "red",
+                }}
+              />
+            ),
+          });
+        }
+      })
+      .catch((err) => {
+        // openNotificationWithIcon("error", "Please try again");
+        api.open({
+          message: "Please try again",
+          // description:
+          //   "This is the content of the notification. This is the content of the notification. This is the content of the notification.",
+          icon: (
+            <ExceptionOutlined
+              style={{
+                color: "red",
+              }}
+            />
+          ),
+        });
+        console.log(err.message, "HERE");
+        dispatch({ type: "reset" });
+      })
+      .finally(() => {
+        setSpinner(false);
+        dispatch({ type: "reset" });
+      });
+  }
 
   return (
     <div className="login">
@@ -363,7 +431,8 @@ const Signup = () => {
                   type="primary"
                   htmlType="submit"
                   onClick={() => {
-                    verifySignup(userObj);
+                    // verifySignup(userObj);
+                    handleSignup();
                   }}
                 >
                   <motion.div whileTap={{ scale: 1.1 }}>
@@ -377,7 +446,7 @@ const Signup = () => {
                     )}
                   </motion.div>
                 </Button>
-                {responseToNext === true && (
+                {/* {responseToNext === true && (
                   <Navigate
                     to={
                       userObj.employeeType === 1
@@ -385,7 +454,7 @@ const Signup = () => {
                         : "/home/employee/dashboard"
                     }
                   />
-                )}
+                )} */}
               </motion.div>
             </Form.Item>
           </Form>

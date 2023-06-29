@@ -184,7 +184,7 @@ function EmployeeLeave() {
         setResponseObj(response.data);
       } else {
         alert("problem");
-        console.log(leaveObj);
+        // console.log(leaveObj);
       }
     } catch (error) {
       console.log(error.message);

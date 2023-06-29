@@ -23,15 +23,16 @@ const TodoCard = ({
   return (
     <div className="singleTodoMainContainer">
       <div className="singleTodo">
+        <div style={{ marginRight: "10%" }}>
+          {" "}
+          Due date: {todo.date.split(" ").join("-")}
+        </div>
         <div className="titleDate">
           <div>Title: {todo.title} </div>
-          <div style={{ marginRight: "10%" }}> Due date: {todo.date}</div>
         </div>
-        <div>{todo.description}</div>
-      </div>
-
-      <div className="todoButtons">
-        <div>
+        <div>Description : {todo.desc}</div>
+        <div className="todoButtons">
+          {/* <div> */}
           <motion.div
             whileHover={{ color: "red", scale: 1.1 }}
             onClick={() => handleDelete(id)}
@@ -39,7 +40,7 @@ const TodoCard = ({
             <DeleteOutlined style={{ fontSize: "20px" }} />
           </motion.div>
 
-          <motion.div
+          {/* <motion.div
             whileHover={{ color: "#22c55e", scale: 1.1 }}
             onClick={() => {
               handleEdit(todo);
@@ -47,7 +48,7 @@ const TodoCard = ({
             }}
           >
             <EditOutlined style={{ fontSize: "20px", marginLeft: "15px" }} />
-          </motion.div>
+          </motion.div> */}
 
           {/* {updateBtn === false ? (<div> <motion.div
               whileHover={{ color: "#22c55e", scale: 1.1 }}
@@ -59,6 +60,7 @@ const TodoCard = ({
             <motion.div whileHover={{ color: "#22c55e", scale: 1.1 }} style={{ marginLeft: "10px" }}>
               <span onClick={() => {handleUpdateTodo(); setUpdateBtn(false)}} class="material-symbols-outlined">upgrade</span>
             </motion.div></div>)} */}
+          {/* </div> */}
         </div>
       </div>
     </div>

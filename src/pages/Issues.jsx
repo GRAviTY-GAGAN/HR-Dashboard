@@ -8,8 +8,11 @@ import {
   CaretDownOutlined,
   CaretUpOutlined,
   DeleteOutlined,
+  ExclamationCircleFilled,
 } from "@ant-design/icons";
 import { LoadingOutlined } from "@ant-design/icons";
+import { Button, notification } from "antd";
+import { TiTick } from "react-icons/ti";
 
 const Issues = () => {
   const url =
@@ -26,6 +29,7 @@ const Issues = () => {
   const [loading, setLoading] = useState(false);
 
   const user = useSelector((store) => store.newReducer.user);
+  const [api, contextHolder] = notification.useNotification();
 
   useEffect(() => {
     fetchIssues();
@@ -40,8 +44,52 @@ const Issues = () => {
         },
       })
       .then((res) => {
-        console.log(res);
+        // console.log(res);
         filterIssues(res.data.issues);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }
+
+  function handleDeleteResolved() {
+    axios
+      .delete(`${url}/employee/issues`, {
+        headers: {
+          "Content-Type": "application/json",
+          authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      })
+      .then((res) => {
+        if (res.statusText == "Success") {
+          fetchIssues();
+          api.open({
+            message: "Issues deleted successfully",
+            // description:
+            //   "This is the content of the notification. This is the content of the notification. This is the content of the notification.",
+            icon: (
+              <TiTick
+                style={{
+                  color: "#4BB543",
+                }}
+              />
+            ),
+          });
+        } else {
+          api.open({
+            message: "Something went wrong.",
+            // description:
+            //   'This is the content of the notification. This is the content of the notification. This is the content of the notification.',
+            icon: (
+              <ExclamationCircleFilled
+                style={{
+                  color: "red",
+                }}
+              />
+            ),
+          });
+          // console.log(res);
+        }
       })
       .catch((err) => {
         console.log(err);
@@ -76,22 +124,25 @@ const Issues = () => {
   if (user.employeeType == 2) {
     return (
       <div className="Issues__mainCont">
-        <div className="Issues__ClearBtnCont">
-          <button
-            disabled={loading}
-            onClick={() => setLoading(true)}
-            className="Issues__ClearBtn"
-          >
-            {loading ? (
-              <Spin indicator={antIcon} />
-            ) : (
-              <div>
-                <DeleteOutlined style={{ fontSize: "20px" }} />
-                &nbsp;Delete Resolved Issues
-              </div>
-            )}
-          </button>
-        </div>
+        {contextHolder}
+        {resolvedIssues.length > 0 && (
+          <div className="Issues__ClearBtnCont">
+            <button
+              disabled={loading}
+              onClick={() => handleDeleteResolved()}
+              className="Issues__ClearBtn"
+            >
+              {loading ? (
+                <Spin indicator={antIcon} />
+              ) : (
+                <div>
+                  <DeleteOutlined style={{ fontSize: "20px" }} />
+                  &nbsp;Delete Resolved Issues
+                </div>
+              )}
+            </button>
+          </div>
+        )}
         <div>
           <div className="Issues__headingCont">
             <div className="Issues__heading">Pending Issues</div>
@@ -110,50 +161,67 @@ const Issues = () => {
               return (
                 <div key={issue._id} className="Issues__issueCard">
                   <div className="Issues__issueCardSub">
-                    <div>
+                    <div className="Issue__IssueStatusFlex">
                       {/* <span className="Issue__statusName">Status : </span> */}
                       <span className="Issue__status ">
                         {issue.status ? "Resolved" : "Pending"}
                       </span>
                     </div>
-                    <div className="Issue__IssueDesc">{issue.issue}</div>
-                  </div>
-                </div>
-              );
-            })}
-          </div>
-        </div>
-        <div>
-          <div className="Issues__headingCont">
-            <div className="Issues__heading">Resolved Issues</div>
-            {!resolveClose ? (
-              <div onClick={() => setResolveClose(true)}>
-                <CaretUpOutlined style={{ fontSize: "25px" }} />
-              </div>
-            ) : (
-              <div onClick={() => setResolveClose(false)}>
-                <CaretDownOutlined style={{ fontSize: "25px" }} />
-              </div>
-            )}
-          </div>
-          <div className={`Issues__resolveCont ${resolveClose ? "hide" : ""}`}>
-            {resolvedIssues?.map((issue) => {
-              return (
-                <div key={issue._id} className="Issues__issueCard">
-                  <div className="Issues__issueCardSub">
                     <div>
-                      {/* <span className="Issue__statusName">Status : </span> */}
-                      <span className="Issue__status resolved">
-                        {issue.status ? "Resolved" : "Pending"}
-                      </span>
+                      <div className="Issue__IssueDesc">{issue.issue}</div>
                     </div>
-                    <div className="Issue__IssueDesc">{issue.issue}</div>
                   </div>
                 </div>
               );
             })}
           </div>
         </div>
+        {resolvedIssues.length > 0 && (
+          <div>
+            <div className="Issues__headingCont">
+              <div className="Issues__heading">Resolved Issues</div>
+              {!resolveClose ? (
+                <div onClick={() => setResolveClose(true)}>
+                  <CaretUpOutlined style={{ fontSize: "25px" }} />
+                </div>
+              ) : (
+                <div onClick={() => setResolveClose(false)}>
+                  <CaretDownOutlined style={{ fontSize: "25px" }} />
+                </div>
+              )}
+            </div>
+            <div
+              className={`Issues__resolveCont ${resolveClose ? "hide" : ""}`}
+            >
+              {resolvedIssues?.map((issue) => {
+                return (
+                  <div key={issue._id} className="Issues__issueCard">
+                    <div className="Issues__issueCardSub">
+                      <div className="Issue__IssueStatusFlex">
+                        {/* <span className="Issue__statusName">Status : </span> */}
+                        <span className="Issue__status resolved">
+                          {issue.status ? "Resolved" : "Pending"}
+                        </span>
+                      </div>
+                      <div>
+                        <div className="Issue__IssueDesc">
+                          <span className="Issue__spanHead">Issue : </span>
+                          <span>{issue.issue}</span>
+                        </div>
+                        <div className="Issue__IssueDesc">
+                          <span className="Issue__spanHead">
+                            Feedback from HR :{" "}
+                          </span>
+                          <span>{issue?.feedback}</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+        )}
       </div>
     );
   } else if (user.employeeType == 1) {
