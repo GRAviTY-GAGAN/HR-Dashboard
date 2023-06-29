@@ -13,6 +13,7 @@ import {
 import { LoadingOutlined } from "@ant-design/icons";
 import { Button, notification } from "antd";
 import { TiTick } from "react-icons/ti";
+import issuesImage from "../assests/undraw_environmental_study_re_q4q8.svg";
 
 const Issues = () => {
   const url =
@@ -144,87 +145,118 @@ const Issues = () => {
           </div>
         )}
         <div>
-          <div className="Issues__headingCont">
-            <div className="Issues__heading">Pending Issues</div>
-            {!pendingClose ? (
-              <div onClick={() => setPendingClose(true)}>
-                <CaretUpOutlined style={{ fontSize: "25px" }} />
+          {pendingIssues.length > 0 && (
+            <div>
+              <div className="Issues__headingCont">
+                <div className="Issues__heading">Pending Issues</div>
+                {!pendingClose ? (
+                  <div onClick={() => setPendingClose(true)}>
+                    <CaretUpOutlined style={{ fontSize: "25px" }} />
+                  </div>
+                ) : (
+                  <div onClick={() => setPendingClose(false)}>
+                    <CaretDownOutlined style={{ fontSize: "25px" }} />
+                  </div>
+                )}
               </div>
-            ) : (
-              <div onClick={() => setPendingClose(false)}>
-                <CaretDownOutlined style={{ fontSize: "25px" }} />
+              <div
+                className={`Issues__pendingCont ${pendingClose ? "hide" : ""}`}
+              >
+                {pendingIssues?.map((issue) => {
+                  return (
+                    <div key={issue._id} className="Issues__issueCard">
+                      <div className="Issues__issueCardSub">
+                        <div className="Issue__IssueStatusFlex">
+                          {/* <span className="Issue__statusName">Status : </span> */}
+                          <span className="Issue__status ">
+                            {issue.status ? "Resolved" : "Pending"}
+                          </span>
+                        </div>
+                        <div>
+                          <div className="Issue__IssueDesc">{issue.issue}</div>
+                        </div>
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
+          )}
+        </div>
+        <div>
+          <div>
+            {resolvedIssues.length > 0 && (
+              <div>
+                <div className="Issues__headingCont">
+                  <div className="Issues__heading">Resolved Issues</div>
+                  {!resolveClose ? (
+                    <div onClick={() => setResolveClose(true)}>
+                      <CaretUpOutlined style={{ fontSize: "25px" }} />
+                    </div>
+                  ) : (
+                    <div onClick={() => setResolveClose(false)}>
+                      <CaretDownOutlined style={{ fontSize: "25px" }} />
+                    </div>
+                  )}
+                </div>
+                <div
+                  className={`Issues__resolveCont ${
+                    resolveClose ? "hide" : ""
+                  }`}
+                >
+                  {resolvedIssues?.map((issue) => {
+                    return (
+                      <div key={issue._id} className="Issues__issueCard">
+                        <div className="Issues__issueCardSub">
+                          <div className="Issue__IssueStatusFlex">
+                            {/* <span className="Issue__statusName">Status : </span> */}
+                            <span className="Issue__status resolved">
+                              {issue.status ? "Resolved" : "Pending"}
+                            </span>
+                          </div>
+                          <div>
+                            <div className="Issue__IssueDesc">
+                              <span className="Issue__spanHead">Issue : </span>
+                              <span>{issue.issue}</span>
+                            </div>
+                            <div className="Issue__IssueDesc">
+                              <span className="Issue__spanHead">
+                                Feedback from HR :{" "}
+                              </span>
+                              <span>{issue?.feedback}</span>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    );
+                  })}
+                </div>
               </div>
             )}
           </div>
-          <div className={`Issues__pendingCont ${pendingClose ? "hide" : ""}`}>
-            {pendingIssues?.map((issue) => {
-              return (
-                <div key={issue._id} className="Issues__issueCard">
-                  <div className="Issues__issueCardSub">
-                    <div className="Issue__IssueStatusFlex">
-                      {/* <span className="Issue__statusName">Status : </span> */}
-                      <span className="Issue__status ">
-                        {issue.status ? "Resolved" : "Pending"}
-                      </span>
-                    </div>
-                    <div>
-                      <div className="Issue__IssueDesc">{issue.issue}</div>
-                    </div>
-                  </div>
-                </div>
-              );
-            })}
-          </div>
         </div>
-        {resolvedIssues.length > 0 && (
-          <div>
-            <div className="Issues__headingCont">
-              <div className="Issues__heading">Resolved Issues</div>
-              {!resolveClose ? (
-                <div onClick={() => setResolveClose(true)}>
-                  <CaretUpOutlined style={{ fontSize: "25px" }} />
-                </div>
-              ) : (
-                <div onClick={() => setResolveClose(false)}>
-                  <CaretDownOutlined style={{ fontSize: "25px" }} />
-                </div>
-              )}
-            </div>
-            <div
-              className={`Issues__resolveCont ${resolveClose ? "hide" : ""}`}
-            >
-              {resolvedIssues?.map((issue) => {
-                return (
-                  <div key={issue._id} className="Issues__issueCard">
-                    <div className="Issues__issueCardSub">
-                      <div className="Issue__IssueStatusFlex">
-                        {/* <span className="Issue__statusName">Status : </span> */}
-                        <span className="Issue__status resolved">
-                          {issue.status ? "Resolved" : "Pending"}
-                        </span>
-                      </div>
-                      <div>
-                        <div className="Issue__IssueDesc">
-                          <span className="Issue__spanHead">Issue : </span>
-                          <span>{issue.issue}</span>
-                        </div>
-                        <div className="Issue__IssueDesc">
-                          <span className="Issue__spanHead">
-                            Feedback from HR :{" "}
-                          </span>
-                          <span>{issue?.feedback}</span>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                );
-              })}
-            </div>
-          </div>
-        )}
       </div>
     );
   } else if (user.employeeType == 1) {
+    if (pendingIssues.length == 0) {
+      return (
+        <div>
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+              flexDirection: "column",
+            }}
+          >
+            <h1>No Issues Pending</h1>
+
+            <img src={issuesImage} />
+          </div>
+        </div>
+      );
+    }
+
     return (
       <div className="Issues__mainCont">
         <div>
