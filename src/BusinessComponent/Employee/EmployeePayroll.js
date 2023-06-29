@@ -16,7 +16,7 @@ function EmployeePayroll() {
   const dispatch = useDispatch();
 
   const url =
-    process.env.NODE_ENV == "developemnt"
+    process.env.NODE_ENV == "development"
       ? process.env.REACT_APP_LOCAL_URL
       : process.env.REACT_APP_PROD_URL;
 

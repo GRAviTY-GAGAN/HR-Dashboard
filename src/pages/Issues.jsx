@@ -17,7 +17,7 @@ import issuesImage from "../assests/undraw_environmental_study_re_q4q8.svg";
 
 const Issues = () => {
   const url =
-    process.env.NODE_ENV == "developemnt"
+    process.env.NODE_ENV == "development"
       ? process.env.REACT_APP_LOCAL_URL
       : process.env.REACT_APP_PROD_URL;
 
