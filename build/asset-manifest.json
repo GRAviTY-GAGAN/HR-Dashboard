@@ -1,0 +1,16 @@
+{
+  "files": {
+    "main.css": "/static/css/main.d5cd9e35.css",
+    "main.js": "/static/js/main.d4a97964.js",
+    "static/media/emptystateforupdates.png": "/static/media/emptystateforupdates.e01c26cc53506b06dc63.png",
+    "static/media/emptystateforleave.png": "/static/media/emptystateforleave.9ccc165be8c33190085a.png",
+    "static/media/undraw_environmental_study_re_q4q8.svg": "/static/media/undraw_environmental_study_re_q4q8.232afea06720beb344e5647d564215a6.svg",
+    "index.html": "/index.html",
+    "main.d5cd9e35.css.map": "/static/css/main.d5cd9e35.css.map",
+    "main.d4a97964.js.map": "/static/js/main.d4a97964.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.d5cd9e35.css",
+    "static/js/main.d4a97964.js"
+  ]
+}

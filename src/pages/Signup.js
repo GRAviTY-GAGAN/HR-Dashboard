@@ -148,8 +148,17 @@ const Signup = () => {
       })
       .catch((err) => {
         // openNotificationWithIcon("error", "Please try again");
+
+        let msg = "";
+
+        if (err?.response.data.msg) {
+          msg = err?.response.data.msg;
+        } else {
+          msg = "Please try again";
+        }
+
         api.open({
-          message: "Please try again",
+          message: msg,
           // description:
           //   "This is the content of the notification. This is the content of the notification. This is the content of the notification.",
           icon: (
@@ -160,7 +169,7 @@ const Signup = () => {
             />
           ),
         });
-        console.log(err.message, "HERE");
+        console.log(err, "HERE");
         dispatch({ type: "reset" });
       })
       .finally(() => {
