@@ -107,6 +107,7 @@ const Signup = () => {
     axios
       .post(`${url}/auth/signup`, userObj)
       .then((res) => {
+        console.log(res);
         if (res.statusText == "Success") {
           dispatch({
             type: ID,
