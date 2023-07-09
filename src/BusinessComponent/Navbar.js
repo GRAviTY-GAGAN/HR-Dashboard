@@ -74,20 +74,11 @@ const Navbar = ({ handleCloseSidebar, sidebarClose }) => {
       <div onClick={handleCloseSidebar} className="navbar__hamOpen">
         <MenuUnfoldOutlined />
       </div>
-      <div>{title}</div>
-      <div
-        style={{
-          fontSize: "1.2rem",
-          color: "#6075fe",
-          fontWeight: "600",
-          marginRight: "1rem",
-          padding: "0.5rem",
-          display: "flex",
-          justifyContent: "space-between",
-          alignItems: "center",
-        }}
-      >
-        <div style={{ marginRight: "8px" }}>{userObj?.firstName}</div>
+      <div className="navbar__location">{title}</div>
+      <div className="navbar__UserInfo">
+        <div className="navbar__UserName" style={{ marginRight: "8px" }}>
+          {userObj?.firstName}
+        </div>
         <div onClick={handleClick}>
           <Avatar
             size={34}

@@ -4,6 +4,7 @@ import Logo1 from "../assests/logo1.png";
 import { MdDashboard } from "react-icons/md";
 import { MdWorkOff } from "react-icons/md";
 import { BsNewspaper } from "react-icons/bs";
+import { FaUser } from "react-icons/fa";
 import { RiMoneyDollarBoxFill } from "react-icons/ri";
 import { useLocation, useNavigate, Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
@@ -61,36 +62,30 @@ const Siderbar = ({ handleCloseSidebar, sidebarClose }) => {
               alignItems: "center",
             }}
           >
-            <div
-              style={{
-                fontSize: "1.4rem",
-                fontWeight: "600",
-                // color: "#748DA6",
-                color: "#354259",
-                cursor: "default",
-              }}
-            >
-              <img
-                src={Logo1}
-                style={{
-                  width: "4rem",
-                  marginLeft: "0.8rem",
-                  cursor: "default",
-                }}
-              />
-              {"  "} Office HR
+            <div className="sidebar__logoCont">
+              <div>
+                <img src={Logo1} className="sidebar__logo" />{" "}
+                <span>Office HR</span>
+              </div>
+              <div onClick={handleCloseSidebar} className="sidebar__hamClose">
+                <div>
+                  <MenuFoldOutlined />
+                </div>
+              </div>
             </div>
           </div>
 
           <div className="sidebarContainer">
-            <div onClick={handleCloseSidebar} className="sidebar__hamClose">
-              <MenuFoldOutlined />
+            <div className="sidebar__userName">
+              <FaUser />
+              <span>{userObj.firstName}</span>
             </div>
             <ul style={{ marginLeft: "2px", marginTop: "0.8rem" }}>
               <Link to="/home/dashboard">
                 <li
                   onClick={() => {
                     setClickStyle(1);
+                    handleCloseSidebar();
                   }}
                   className={`${clickStyle == 1 ? "item active" : "item "}`}
                 >
@@ -112,6 +107,7 @@ const Siderbar = ({ handleCloseSidebar, sidebarClose }) => {
                 <li
                   onClick={() => {
                     setClickStyle(2);
+                    handleCloseSidebar();
                   }}
                   className={`${clickStyle == 2 ? "item active" : "item "}`}
                 >
@@ -133,6 +129,7 @@ const Siderbar = ({ handleCloseSidebar, sidebarClose }) => {
                 <li
                   onClick={() => {
                     setClickStyle(3);
+                    handleCloseSidebar();
                   }}
                   className={`${clickStyle == 3 ? "item active" : "item "}`}
                 >
@@ -156,6 +153,7 @@ const Siderbar = ({ handleCloseSidebar, sidebarClose }) => {
                     <li
                       onClick={() => {
                         setClickStyle(4);
+                        handleCloseSidebar();
                       }}
                       className={`${clickStyle == 4 ? "item active" : "item "}`}
                     >
@@ -179,6 +177,7 @@ const Siderbar = ({ handleCloseSidebar, sidebarClose }) => {
                 <li
                   onClick={() => {
                     setClickStyle(5);
+                    handleCloseSidebar();
                   }}
                   className={`${clickStyle == 5 ? "item active" : "item "}`}
                 >

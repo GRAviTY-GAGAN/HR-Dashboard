@@ -41,8 +41,7 @@ function EmployeePayroll() {
 
   return (
     <div className="mainstyle">
-      <div className="headingtxt">
-        {" "}
+      <div className="employeePayroll__headingtxt">
         <span className="cardtxt"></span> Payroll Management{" "}
       </div>
 

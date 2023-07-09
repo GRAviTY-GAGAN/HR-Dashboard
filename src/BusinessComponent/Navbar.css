@@ -58,6 +58,17 @@
     border-radius: 4px;
 }
 
+.navbar__UserInfo {
+    font-size: 1.2rem;
+    color: #6075fe;
+    font-weight: 600;
+    margin-right: 1rem;
+    padding: 0.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
 .navbar__hamOpen {
     display: none;
     color: #A4A6B3;
@@ -67,6 +78,22 @@
     .navbar__hamOpen {
         display: block;
         font-size: x-large;
+        /* flex-grow: 1; */
+    }
+
+    .navbar__UserInfo {
+        margin-right: -10px;
+        /* flex-grow: 0; */
+    }
+
+    .navbar__UserName {
+        display: none;
+    }
+
+    .navbar__location {
+        font-size: medium;
+        font-weight: 500;
+        letter-spacing: 1px;
     }
 
     .navbar__navbar {

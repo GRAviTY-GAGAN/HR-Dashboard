@@ -3,9 +3,9 @@
    padding: 0.5rem;
 }
 
-.headingtxt {
+.employeePayroll__headingtxt {
    font-size: 20px;
-   color: #7bd4fb;
+   color: #6075fe;
    font-weight: 600;
    line-height: 30px;
 }
@@ -146,14 +146,16 @@
 
    .editbtn {
       width: 100px;
+      min-width: 140px;
    }
 
    .raiseissuebtn {
       width: 140px;
    }
 
-   .headingtxt {
-      text-align: center;
+   .employeePayroll__headingtxt {
+      text-align: left;
+      margin-left: 1rem;
    }
 
    .employeePayroll__empprstyle {
@@ -172,6 +174,14 @@
       justify-content: center;
    }
 
+   .employeePayroll__empprstyle>div>h2 {
+      margin-left: 1rem;
+   }
+
+   .employeePayroll__empprstyle>div>h3 {
+      margin-left: 1rem;
+   }
+
 }
 
 @media screen and (max-width:900px) and (min-width:501px) {
@@ -179,7 +189,7 @@
       width: 100%;
    }
 
-   .headingtxt {
+   .employeePayroll__headingtxt {
       font-size: 18px;
       line-height: 20px;
    }
