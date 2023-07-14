@@ -142,7 +142,7 @@ const Todo = () => {
       })
       .then((res) => {
         // console.log(res);
-        if (res.statusText == "Success") {
+        if (res.data.msg == "Success") {
           notification.open({
             message: "Alert",
             description: "Todo Deleted",
