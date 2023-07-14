@@ -64,10 +64,10 @@ const Todo = () => {
         })
         .then((res) => {
           // console.log(res);
-          if (res.statusText == "Success") {
+          if (res.data.msg == "Todo added.") {
             notification.open({
-              message: "Message",
-              description: "Your tasks are saved",
+              message: res.data.msg,
+              // description: "Your tasks are saved",
               icon: (
                 <TiTick
                   style={{

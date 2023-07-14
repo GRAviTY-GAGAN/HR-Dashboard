@@ -28,7 +28,7 @@ function RaiseIssueModal({ raiseIssueModal, setRaiseIssueModal }) {
         .then((res) => {
           // console.log("HER", res);
           setIssueData("");
-          if (res.statusText == "Saved") {
+          if (res.data.msg == "Success") {
             notification.open({
               message: "Your Issue has been sent to the Admin!",
               icon: <TiTick style={{ fontSize: "1.5rem", color: "#4BB543" }} />,

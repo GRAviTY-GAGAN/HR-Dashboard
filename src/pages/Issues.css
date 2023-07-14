@@ -106,6 +106,12 @@
     color: grey;
 }
 
+.adminIssueFlex {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
 @media screen and (max-width:500px) {
     .Issues__mainCont {
         margin: 1rem;
@@ -118,7 +124,7 @@
 
     .Issue__IssueStatusFlex {
         display: flex;
-        justify-content: end;
+        justify-content: space-between;
     }
 
     .adminIssueFlex {

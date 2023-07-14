@@ -185,7 +185,7 @@ const Issues = () => {
                 {pendingIssues?.map((issue) => {
                   return (
                     <div key={issue._id} className="Issues__issueCard">
-                      <div className="Issues__issueCardSub">
+                      <div className="Issues__issueCardSub ">
                         <div className="Issue__IssueStatusFlex">
                           {/* <span className="Issue__statusName">Status : </span> */}
                           <span className="Issue__status ">
@@ -283,7 +283,7 @@ const Issues = () => {
           {pendingIssues?.map((issue) => {
             return (
               <div key={issue._id} className="Issues__issueCard">
-                <div className="Issues__issueCardSub">
+                <div className="Issues__issueAdminCardSub">
                   <div>
                     <div className="Issue__IssueStatusFlex adminIssueFlex">
                       <div
