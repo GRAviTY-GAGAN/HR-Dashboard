@@ -13,6 +13,7 @@ import {
 import { LoadingOutlined } from "@ant-design/icons";
 import { Button, notification } from "antd";
 import { TiTick } from "react-icons/ti";
+import { FaUserCircle } from "react-icons/fa";
 import issuesImage from "../assests/undraw_environmental_study_re_q4q8.svg";
 
 const Issues = () => {
@@ -45,7 +46,7 @@ const Issues = () => {
         },
       })
       .then((res) => {
-        // console.log(res);
+        console.log(res);
         filterIssues(res.data.issues);
       })
       .catch((err) => {
@@ -123,6 +124,25 @@ const Issues = () => {
   );
 
   if (user.employeeType == 2) {
+    if (pendingIssues.length == 0 && resolvedIssues.length == 0) {
+      return (
+        <div>
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+              flexDirection: "column",
+            }}
+          >
+            <h1>No Issues Pending</h1>
+
+            <img src={issuesImage} />
+          </div>
+        </div>
+      );
+    }
+
     return (
       <div className="Issues__mainCont">
         {contextHolder}
@@ -265,10 +285,25 @@ const Issues = () => {
               <div key={issue._id} className="Issues__issueCard">
                 <div className="Issues__issueCardSub">
                   <div>
-                    {/* <span className="Issue__statusName">Status : </span> */}
-                    <span className="Issue__status">
-                      {issue.status ? "Resolved" : "Pending"}
-                    </span>
+                    <div className="Issue__IssueStatusFlex adminIssueFlex">
+                      <div
+                        style={{
+                          display: "flex",
+                          alignItems: "center",
+                          gap: "0.5rem",
+                        }}
+                      >
+                        <span style={{ fontSize: "20px", marginTop: "5px" }}>
+                          <FaUserCircle />
+                        </span>
+                        <span style={{ fontWeight: 500, fontSize: "16px" }}>
+                          {issue.empName}
+                        </span>
+                      </div>
+                      <span className="Issue__status">
+                        {issue.status ? "Resolved" : "Pending"}
+                      </span>
+                    </div>
                   </div>
                   <div className="Issue__IssueDesc">{issue.issue}</div>
                 </div>

@@ -17,13 +17,16 @@ const IssueModal = ({ issueModalOpen, setIssueModalOpen, id, fetchIssues }) => {
       .then((res) => {
         // console.log(res);
 
-        if (res.statusText == "Success") {
+        if (res.data.msg == "Updated") {
           api.open({
-            message: "Something went wrong!",
+            message: "Issue Resolved.",
 
             icon: <TiTick style={{ fontSize: "1.5rem", color: "#4BB543" }} />,
           });
-          fetchIssues();
+
+          setTimeout(() => {
+            fetchIssues();
+          }, 2000);
         } else {
           api.open({
             message: "Something went wrong!",

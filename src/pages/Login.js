@@ -276,7 +276,7 @@ const Login = () => {
                 </motion.div>
               </Button>
 
-              <Button
+              {/* <Button
                 onClick={() => guestLogin("test@admin.com", "test123")}
                 className="login-button"
                 style={{
@@ -297,9 +297,9 @@ const Login = () => {
                     </div>
                   )}
                 </motion.div>
-              </Button>
+              </Button> */}
 
-              <Button
+              {/* <Button
                 onClick={() => guestLogin("test@emp.com", "test123")}
                 className="login-button"
                 style={{
@@ -318,7 +318,7 @@ const Login = () => {
                     </div>
                   )}
                 </motion.div>
-              </Button>
+              </Button> */}
             </Form.Item>
           </Form>
         </div>
