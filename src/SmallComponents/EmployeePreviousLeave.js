@@ -231,7 +231,9 @@ function EmployeePreviousLeave({ pendingObj }) {
                           ) : levObj.isRejected == true ? (
                             <span className="rejecttxt">Rejected</span>
                           ) : (
-                            <span className="approvetxt">Approved</span>
+                            <span className="approvetxt leaveApproved">
+                              Approved
+                            </span>
                           )}
                         </div>
                       </div>

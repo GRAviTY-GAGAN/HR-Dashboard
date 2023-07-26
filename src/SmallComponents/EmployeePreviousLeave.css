@@ -250,6 +250,11 @@
     display: inline-block;
   }
 
+  .leaveApproved {
+    padding: 2px 7px;
+    padding-bottom: 5px;
+  }
+
   .leaveHeading {
     margin-left: 14px;
   }
