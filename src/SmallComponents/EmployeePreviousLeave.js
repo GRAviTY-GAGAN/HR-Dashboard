@@ -104,7 +104,9 @@ function EmployeePreviousLeave({ pendingObj }) {
                 </div>
               ) : (
                 <div>
-                  <span className="pendingtxt">Pending Leave Section</span>
+                  <span className="pendingtxt leaveHeading">
+                    Pending Leave Section
+                  </span>
                   {data?.map((dataObj, index) => (
                     <div key={index}>
                       {dataObj.isPending == true && (

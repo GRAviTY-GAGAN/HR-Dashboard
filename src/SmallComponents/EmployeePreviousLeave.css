@@ -250,6 +250,10 @@
     display: inline-block;
   }
 
+  .leaveHeading {
+    margin-left: 14px;
+  }
+
 }
 
 @media screen and (min-width:500px) and (max-width:900px) {
